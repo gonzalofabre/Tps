@@ -1,2 +1,2 @@
 # Tps
-tp1 y tp2
+Trabajos prácticos
