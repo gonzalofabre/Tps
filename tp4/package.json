@@ -1,0 +1,15 @@
+{
+  "name": "tp4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tp4.js",
+  "scripts": {
+    "start": "node tp4.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
