@@ -1,30 +1,25 @@
-function numeroMayor (numero) {
-let num = numero.toString();
-var numMayor = 0
-var sonIguales = 1
 
-if (num.length === 3) {
-    for (i=0; i<num.length; i++) {
-        if(num[i]>numMayor){
-            numMayor = num[i];
-        }else if(num[i] == numMayor) {
-            numMayor = num[i];
-            sonIguales++
-        }
-    }
-
-    if(sonIguales!==3) {
-        return numMayor;
+function numeroMayor (num1,num2,num3) {
+    if(num1 == num2 && num1 == num3){
+        return 'Son iguales'
     }else{
-        return 'Son Iguales'
-    }
-}
+        const numeros = [num1, num2, num3];
+        let numMayor = 0;
+        let sonIguales = 1;
+
+        numeros.forEach(element => {
+            if(element>numMayor) {
+                numMayor = element;
+            };
+        });
+        return numMayor;
+    };
+    
+
 };
 
-console.log(numeroMayor(961))
-console.log(numeroMayor(106))
+console.log(numeroMayor(1,3,100));
 
-console.log(numeroMayor(111))
+console.log(numeroMayor(0,0,0));
 
-
-
+console.log(numeroMayor(0,"3",2));
