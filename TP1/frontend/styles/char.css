@@ -1,0 +1,273 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    --color-primario: #913f33;
+    --color-secundario: #ff705f;
+    --color-terciario: #ffaa67;
+    --color-background: #ffdfab;
+    --border-colors: #9fb9c2;
+    font-family: 'Nunito Sans', sans-serif;
+}   
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    gap:10px;
+    padding: 10px;
+    background-color: var(--color-primario);
+    color: var(--border-colors);
+    font-style:inherit;
+
+}
+
+header .header_logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 70%;
+    align-items: center;
+}
+
+header .header_logo img {
+    width: 50%;
+    border-radius: 15px;
+}
+header .header_logo h1 {
+    font-size: 2rem;
+    width: 50%;
+    text-align: center;
+}
+header .header_input {
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+}
+header .header_input input {
+    width:100%;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 30px;
+    border: var(--border-colors);
+    
+}
+
+header h1 {
+    margin: 0px 20px;
+    line-height: 100%;
+}
+
+nav {
+    display:flex;
+    justify-content: center;
+    padding: 7px 17px;
+    font-size: 1.1rem;
+    gap: 10px;
+    background-color: var(--color-secundario);
+
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    padding:3px 10px;
+    border: 1px transparent;
+    border-radius: 30px;
+}
+
+nav a:hover {
+    color: var(--color-primario);
+    background-color: var(--color-background);
+}
+main {
+    display: flex;
+    flex-direction: column;
+    padding:10px;
+    gap:10px;
+    /* background-color: var(--color-background); */
+}
+main .item_container {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    margin:10px;
+}
+main .item_container fieldset {
+    padding:15px;
+    border: 1px solid var(--border-colors);
+    border-radius: 15px;
+}
+main .item_container fieldset {
+    font-weight: bold;
+    text-align: center;
+}
+main .item_container .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin:10px;
+    border-bottom: 2px solid var(--border-colors);
+}
+
+main .item_container .item img {
+    width: 70%;
+    height: 250px;
+    border-radius: 15px;
+}
+main .item_container .item_actions {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;    
+    width: 100%;
+    
+}
+
+main .item_container .item_actions_links {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    
+}
+
+main .item_container .item_actions_links a {
+    text-decoration: none;
+    width: 33%;
+    line-height: 100%;
+    font-size: 0.8rem;
+    color: #2f89a7;
+    font-weight: bold;
+}
+main .item_container .item_actions_links a:hover {
+    background-color: var(--color-secundario);
+    color: white;
+    border-radius: 15px;
+
+}
+main .item_container .item_quantity {
+    display:flex;
+    width:100%;
+    justify-content: space-evenly;
+    margin:15px;
+}
+
+main .item_container .item_quantity p {
+    font-size: .8rem;
+    font-weight: normal;
+}
+
+main .item_container .item_quantity input {
+    text-align: center;
+    border-radius: 15px;
+    width:20%;
+    background-color: var(--color-secundario);
+    color:white;
+    font-weight: bold;
+}
+
+main .item_container .item_price {
+    text-align: center;
+    margin:0 0 15px 0;
+} 
+
+main .resume {
+    display: flex;
+    flex-direction:column;
+}
+
+main .resume h2 {
+    text-align: center;
+    border-bottom: 1px solid var(--border-colors);
+    margin:10px 30px;
+}
+main .resume_infoGrid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 80% 20%;
+    font-weight: bold;
+}
+
+main .resume_infoGrid #gratis {
+    color:green;
+}
+main .resume a {
+    text-decoration: none;
+    margin:5px;
+    text-align: center;
+    color: #2f89a7;
+    font-weight: bold;
+}
+
+main .resume a:hover {
+    background-color: var(--color-secundario);
+    color: white;
+    border-radius: 15px;
+}
+
+main .resume_total {
+    width: 90%;
+    min-height: 40px;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    border-top: 1px solid var(--border-colors);
+    padding: 10px;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+main #resume_total_price {
+    font-size: 1.5rem;
+    line-height: 100%;
+    margin:1px;
+    width: 50%;
+    text-align: end;
+}
+
+main .resume button {
+    height: 40px;
+    width: 40%;
+    border-radius: 30px;
+    border: 1px solid var(--border-colors);
+    background-color: var(--color-secundario);
+    margin: auto;
+    color: white;
+
+}
+
+main .resume button:hover {
+    border: 3px solid var(--color-primario);
+    font-weight: bold;
+    background-color: var(--color-background);
+    color: black;
+}
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px;
+    background-color: var(--color-terciario);
+}
+
+footer a {
+    width: 30%;
+    text-decoration: none;
+    color:  white;
+    padding:6px 15px;
+    border: 1px transparent;
+    border-radius: 30px;
+    text-align: center;
+
+}
+
+footer a:hover {
+    color: var(--color-secundario);
+    background-color: var(--color-background);
+}
+
+
+
