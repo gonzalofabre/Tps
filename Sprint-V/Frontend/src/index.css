@@ -2,11 +2,41 @@
   padding: 0;
   margin: 0; 
 }
-
 .root {
   background-color: black;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding:1rem;
 }
 
+.filters {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4px;
+  border: 1px solid;
+  border-radius: 1rem;
+  width: 30%;
+  min-height: 120px;
+  background-color: white;
+  margin: auto;
+
+}
+
+.filters h3 {
+  margin: 4px
+}
+
+.filters-input {
+  display: flex;
+  justify-content: space-around;
+  margin:auto;
+  width: 80%;
+}
+.filters-input label {
+  width: 50%;
+}
 .products-layout {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
