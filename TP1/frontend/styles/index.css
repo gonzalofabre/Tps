@@ -166,4 +166,8 @@ footer a:hover {
     background-color: var(--color-background);
 }
 
-
+@media (min-width: 800px) {
+    main {
+        /* background-color:red; */
+    }
+}
