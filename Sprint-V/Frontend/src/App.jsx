@@ -2,6 +2,7 @@
 import './App.css'
 import { useEffect, useState } from 'react'
 import Card from './components/Card'
+import Login from './components/Login'
 import peek from './utils/peek'
 // import sleep from './utils/sleep'
 
@@ -87,6 +88,7 @@ function App() {
     description={product.description}
     price={product.price} ></Card>
     )) }
+    <Login></Login>
 
  </div>
 
