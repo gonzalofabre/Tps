@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Header from "../Header/Header";
 // import peek from "../utils/peek";
 import axios from 'axios';
 
@@ -7,6 +8,9 @@ function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   return (
+    <>
+    <Header/>
+
     <div className="login">
         <label htmlFor="userName">Nombre de usuario</label>
       <input value={userName} type="text" id="userName" onChange={(e) => setUserName(e.target.value)} />
@@ -31,6 +35,7 @@ function Login() {
         Login!
       </button>
     </div>
+    </>
   );
 }
 

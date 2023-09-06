@@ -1,6 +1,7 @@
 import "../App.css";
 import { useEffect, useState } from "react";
-import Card from "../components/Card";
+import Header from "../components/Header/Header";
+import Card from "../components/Card/Card";
 import peek from "../utils/peek";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -29,6 +30,8 @@ function Home() {
 
   return (
     <>
+    <Header />
+
       <div className="root">
         <div className="filters">
           <h3>Buscar por :</h3>

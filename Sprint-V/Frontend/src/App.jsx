@@ -2,7 +2,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import Home from "./pages/Home";
-import Login from "./components/Login";
+import Login from "./components/Login/Login";
 import peek from "./utils/peek";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import sleep from './utils/sleep'
