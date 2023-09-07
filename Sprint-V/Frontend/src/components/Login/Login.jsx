@@ -5,7 +5,6 @@ import axios from "axios";
 // import { redirect } from "react-router-dom";
 
 function Login() {
-  const [isLoading, setIsLoading] = useState(false);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   return (
