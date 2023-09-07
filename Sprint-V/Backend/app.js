@@ -5,8 +5,19 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 // const bodyParser = require('body-parser');
 const sessions = require('express-session');
-const sequelize = require('sequelize');
 const cors = require('cors');
+
+const { sequelize } = require('./db/database');
+const Users = require('./models/users');
+
+try {
+  sequelize.authenticate()
+  .then(() => {
+    console.log('Conexión con la base de datos establecida')
+  })
+} catch {
+  console.error('No se pudo conectar con la base de datos')
+}
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
