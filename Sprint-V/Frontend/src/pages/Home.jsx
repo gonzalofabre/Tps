@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 import Card from "../components/Card/Card";
 import peek from "../utils/peek";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Button, Drawer } from "antd";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -18,6 +19,9 @@ function Home() {
   const uniqueCategories = [...new Set(categories)];
   const [filterByCategory, setFilterByCategory] = useState("-");
 
+  //Drawer
+  const [isShow, setIsShow] = useState(false);
+
   useEffect(() => {
     fetch(peek("http://localhost:3000/products"))
       .then((data) => peek(data.json()))
@@ -30,7 +34,26 @@ function Home() {
 
   return (
     <>
-    <Header />
+      <Header />
+
+      <Drawer
+        title={
+          <div className="drawer_buy">
+            <p>Tus Productos</p>
+            <Button>Comprar</Button>
+          </div>
+        }
+        onClose={() => setIsShow(false)}
+        open={isShow}
+      ></Drawer>
+
+      <div className="box_button_open_drawer"> 
+   
+      <Button type="primary" size="large" onClick={() => setIsShow(true)}>
+       Cart
+        <ShoppingCartOutlined />
+      </Button>
+      </div>
 
       <div className="root">
         <div className="filters">
@@ -117,5 +140,4 @@ function Home() {
   );
 }
 
-
-export default Home
+export default Home;
