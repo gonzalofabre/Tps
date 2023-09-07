@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 // const bodyParser = require('body-parser');
 const sessions = require('express-session');
+const sequelize = require('sequelize');
 const cors = require('cors');
 
 const indexRouter = require('./routes/index');

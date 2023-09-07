@@ -53,6 +53,10 @@
   gap: 1rem;
   padding:1rem;
 }
+.login {
+  background-color: white;
+  padding: 30px;
+}
 
 .filters {
   display: flex;
