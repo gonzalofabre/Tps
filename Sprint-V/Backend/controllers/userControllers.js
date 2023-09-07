@@ -14,15 +14,19 @@ module.exports = {
     try {
       const { userName, password } = req.body;
       const userFound = await Users.findOne({ where: { userName: userName } });
-
-    //   return userFound === null
-    //     ? res.status(404).json({status: 404, message: "Usuario no encontrado"})
-    //     : userFound.password == password
-    //     ? res.json({ data: { status: 200, message: "Usuario logeado", rol: userFound.rol } })
-    //     : res.status(401).json(false);
-    return res.json({data: {status: 200, message:"Ingreso", name: userFound.lastName }})
-    } catch {
-      return res.json(err);
+  
+      if (!userFound) {
+        return res.status(404).json({ status: 404, message: "Usuario no encontrado" });
+      }
+  
+      if (userFound.password === password) {
+        return res.json({ data: { status: 200, message: "Usuario logeado", rol: userFound.rol } });
+      } else {
+        return res.status(401).json({ status: 401, message: "Credenciales incorrectas" });
+      }
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ status: 500, message: "Error interno del servidor" });
     }
   },
 };

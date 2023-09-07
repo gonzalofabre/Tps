@@ -17,6 +17,7 @@ Users.init(
   {
     sequelize,
     modelName: "users",
-  }
+    timestamps: false, // Desactiva las columnas createdAt y updatedAt
+  },
 );
 module.exports = Users;
