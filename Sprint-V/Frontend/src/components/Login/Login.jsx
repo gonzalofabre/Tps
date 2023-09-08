@@ -4,15 +4,19 @@ import Header from "../Header/Header";
 import axios from "axios";
 // import { redirect } from "react-router-dom";
 
+import {  CloseOutlined} from "@ant-design/icons"
+
+import {useLoginStore } from '../../stores/useLoginStore'
+
 function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { setIsLoginShow } = useLoginStore();
   return (
     <>
-      <Header />
-
       <div className="login">
+        <button className="close_button"><CloseOutlined onClick={() => setIsLoginShow(false)} /> </button>
         <label htmlFor="userName">Nombre de usuario</label>
         <input
           value={userName}

@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useLoginStore } from '../../stores/useLoginStore'
 
 function Header() {
+  const {setIsLoginShow} = useLoginStore()
   return (
     <div className="header">
       <div className="header_logo">
@@ -10,7 +12,7 @@ function Header() {
       </div>
       <div className="header_links">
         <Link className="header_links_link" to={"/"}>Home</Link>
-        <Link className="header_links_link" to={"/login"}>Login</Link>
+        <Link className="header_links_link" to={"/"} onClick={() => setIsLoginShow(true)}>Login</Link>
         <Link className="header_links_link" to={"/register"}>Register</Link>
       </div>
     </div>

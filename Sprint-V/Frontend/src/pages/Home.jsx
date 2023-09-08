@@ -1,10 +1,12 @@
 import "../App.css";
 import { useEffect, useState } from "react";
 import Header from "../components/Header/Header";
+import Login from "../components/Login/Login";
 import Card from "../components/Card/Card";
 import peek from "../utils/peek";
 import { Button, Drawer } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
+import { useLoginStore } from '../stores/useLoginStore'
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -20,7 +22,12 @@ function Home() {
   const [filterByCategory, setFilterByCategory] = useState("-");
 
   //Drawer
-  const [isShow, setIsShow] = useState(false);
+  const [isCartDrawerShow, setIsCartDrawerShow] = useState(false);
+
+  //Login
+  const isLoginShow = useLoginStore((state) => state.isLoginShow);
+
+  
 
   useEffect(() => {
     fetch(peek("http://localhost:3000/products"))
@@ -35,6 +42,7 @@ function Home() {
   return (
     <>
       <Header />
+      
 
       <Drawer
         title={
@@ -43,13 +51,14 @@ function Home() {
             <Button>Comprar</Button>
           </div>
         }
-        onClose={() => setIsShow(false)}
-        open={isShow}
+        onClose={() => setIsCartDrawerShow(false)}
+        open={isCartDrawerShow}
       ></Drawer>
 
-      <div className="box_button_open_drawer"> 
+      <div className="box_button_open_drawer">
+      {isLoginShow ? <Login/> : ""}
    
-      <Button type="primary" size="large" onClick={() => setIsShow(true)}>
+      <Button type="primary" size="large" onClick={() => setIsCartDrawerShow(true)}>
        Cart
         <ShoppingCartOutlined />
       </Button>
@@ -60,7 +69,6 @@ function Home() {
           <h3>Buscar por :</h3>
 
           <div className="filters-input">
-            {" "}
             <label htmlFor="filter-name">Nombre</label>
             <input
               type="text"
