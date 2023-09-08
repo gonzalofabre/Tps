@@ -5,11 +5,12 @@ class Products extends Model {}
 
 Products.init(
   {
-    name: DataTypes.STRING,
+    title: DataTypes.STRING,
     id:{type:DataTypes.INTEGER,primaryKey:true, autoIncrement:true},
     desc: DataTypes.STRING,
     category: DataTypes.STRING,
-    price: DataTypes.INTEGER
+    price: DataTypes.INTEGER,
+    image: DataTypes.STRING
   },
   {
     sequelize,
