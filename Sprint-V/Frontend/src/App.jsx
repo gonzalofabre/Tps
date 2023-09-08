@@ -1,7 +1,8 @@
 // import { useState } from 'react'
 import "./App.css";
 import { useEffect, useState } from "react";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
+import Register from "./pages/Register/Register";
 import Login from "./components/Login/Login";
 import peek from "./utils/peek";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path='/register' element= {<Register />} />
         </Routes>
       </BrowserRouter>
     </>

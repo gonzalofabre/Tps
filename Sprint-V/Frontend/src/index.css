@@ -4,13 +4,14 @@
   --color-primario: #913f33;
   --color-secundario: #ff705f;
   --color-terciario: #ffaa67;
-  --color-background: #f3edb6;
+  --color-background: rgb(131, 129, 129);
   --border-colors: #9fb9c2;
   font-family: 'Nunito Sans', sans-serif;
 }   
 #root {
   background-color: black;
 }
+
 .header {
   display: flex;
   justify-content: space-between;

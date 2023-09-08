@@ -1,12 +1,12 @@
-import "../App.css";
+import "../../App.css";
 import { useEffect, useState } from "react";
-import Header from "../components/Header/Header";
-import Login from "../components/Login/Login";
-import Card from "../components/Card/Card";
-import peek from "../utils/peek";
+import Header from "../../components/Header/Header";
+import Login from "../../components/Login/Login";
+import Card from "../../components/Card/Card";
+import peek from "../../utils/peek";
 import { Button, Drawer } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import { useLoginStore } from '../stores/useLoginStore'
+import { useLoginStore } from '../../stores/useLoginStore'
 
 function Home() {
   const [products, setProducts] = useState([]);
