@@ -2,17 +2,20 @@ import "../../App.css";
 import { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import Login from "../../components/Login/Login";
-import Welcome from '../../components/Welcome/Welcome';
+import Welcome from "../../components/Welcome/Welcome";
 import Card from "../../components/Card/Card";
+import { Cart } from "../../components/Cart/Cart";
 import peek from "../../utils/peek";
 import { Button, Drawer } from "antd";
 import { ShoppingCartOutlined, MenuFoldOutlined } from "@ant-design/icons";
-import { useLoginStore } from '../../stores/useLoginStore'
-import { useLogStore } from '../../stores/useLogStore'
-import { getUser } from '../../components/cookieHandler/cookieHandler'
+import { useLoginStore } from "../../stores/useLoginStore";
+import { useLogStore } from "../../stores/useLogStore";
+import { getUser } from "../../components/cookieHandler/cookieHandler";
+import { useCartStore } from "../../stores/useCartStore";
 
 function Home() {
   const [products, setProducts] = useState([]);
+  const globalProducts = useCartStore((state) => state.products);
 
   //Filters
 
@@ -29,11 +32,10 @@ function Home() {
 
   //Login
   const isLoginShow = useLoginStore((state) => state.isLoginShow);
-  const isLoggedIn = useLogStore((state) => state.isLoggedIn)
+  const isLoggedIn = useLogStore((state) => state.isLoggedIn);
 
   //Datos de cookie
   const userCookies = getUser();
-  
 
   useEffect(() => {
     fetch(peek("http://localhost:3000/products"))
@@ -48,29 +50,46 @@ function Home() {
   return (
     <>
       <Header />
-      
 
       <Drawer
         title={
           <div className="drawer_buy">
-            <p>Tus Productos</p>
-            <Button>Comprar</Button>
+            <p>Your Products:</p>
+            <Button>Buy!</Button>
           </div>
         }
         onClose={() => setIsCartDrawerShow(false)}
         open={isCartDrawerShow}
-      ></Drawer>
+      >
+        <Cart></Cart>
+        <div className="drawer_total">
+          <h2>Total</h2>
+          <p> 123133333333333323</p>
+        </div>
+      </Drawer>
 
       <div className="box_button_open_drawer">
-        <Button size="large"> <MenuFoldOutlined /> </Button>
-      {isLoginShow ? <Login/> : ""}
-      {isLoginShow ? "" : isLoggedIn ? <Welcome name={userCookies.name} /> : ""}
-      
-   
-      <Button type="primary" size="large" onClick={() => setIsCartDrawerShow(true)}>
-       Cart
-        <ShoppingCartOutlined />
-      </Button>
+        <Button size="large">
+          {" "}
+          <MenuFoldOutlined />{" "}
+        </Button>
+        {isLoginShow ? <Login /> : ""}
+        {isLoginShow ? (
+          ""
+        ) : isLoggedIn ? (
+          <Welcome name={userCookies.name} />
+        ) : (
+          ""
+        )}
+
+        <Button
+          type="primary"
+          size="large"
+          onClick={() => setIsCartDrawerShow(true)}
+        >
+          Cart
+          <ShoppingCartOutlined />
+        </Button>
       </div>
 
       <div className="root">
@@ -144,11 +163,13 @@ function Home() {
             )
             .map((product) => (
               <Card
-                key={`key-${product.title}-${product.price}`}
+                key={`key-${product.title}-${product.id}`}
                 title={product.title}
                 imageUrl={product.image}
                 description={product.description}
                 price={product.price}
+                product = {product}
+                id = {product.id}
               ></Card>
             ))}
         </div>

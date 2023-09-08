@@ -6,6 +6,7 @@ import Register from "./pages/Register/Register";
 import Login from "./components/Login/Login";
 import peek from "./utils/peek";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {useCartStore} from './stores/useCartStore';
 // import sleep from './utils/sleep'
 
 function App() {
