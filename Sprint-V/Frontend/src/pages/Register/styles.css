@@ -85,8 +85,13 @@ select {
   margin: 10px 0;
 }
 
-.item span {
+.item_span {
   color: red;
+}
+
+.item_span_green {
+    color: green;
+    margin-left: 1rem;
 }
 .button {
   margin-top: 10px;
