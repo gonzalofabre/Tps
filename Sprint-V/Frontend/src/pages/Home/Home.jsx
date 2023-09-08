@@ -32,7 +32,7 @@ function Home() {
   const isLoggedIn = useLogStore((state) => state.isLoggedIn)
 
   //Datos de cookie
-  const user = getUser();
+  const userCookies = getUser();
   
 
   useEffect(() => {
@@ -64,7 +64,7 @@ function Home() {
       <div className="box_button_open_drawer">
         <Button size="large"> <MenuFoldOutlined /> </Button>
       {isLoginShow ? <Login/> : ""}
-      {isLoginShow ? "" : isLoggedIn ? <Welcome name={user.name} /> : ""}
+      {isLoginShow ? "" : isLoggedIn ? <Welcome name={userCookies.name} /> : ""}
       
    
       <Button type="primary" size="large" onClick={() => setIsCartDrawerShow(true)}>

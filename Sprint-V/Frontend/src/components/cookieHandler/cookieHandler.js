@@ -16,7 +16,7 @@ cookies.set('rol', rol, [{path: "/"},{ maxAge: oneHour}]);
 
 function getUser() {
     const cookies = new Cookies();
-    const user = {
+    const userCookies = {
         id: cookies.get('id'),
         adress: cookies.get('adress'),
         tel: cookies.get('tel'),
@@ -26,7 +26,7 @@ function getUser() {
         rol: cookies.get('rol')
     }
 
-    return user
+    return userCookies
 }
 
 
