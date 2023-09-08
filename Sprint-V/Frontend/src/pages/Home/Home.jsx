@@ -2,12 +2,14 @@ import "../../App.css";
 import { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import Login from "../../components/Login/Login";
+import Welcome from '../../components/Welcome/Welcome';
 import Card from "../../components/Card/Card";
 import peek from "../../utils/peek";
 import { Button, Drawer } from "antd";
 import { ShoppingCartOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import { useLoginStore } from '../../stores/useLoginStore'
 import { useLogStore } from '../../stores/useLogStore'
+import { getUser } from '../../components/cookieHandler/cookieHandler'
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -27,7 +29,10 @@ function Home() {
 
   //Login
   const isLoginShow = useLoginStore((state) => state.isLoginShow);
+  const isLoggedIn = useLogStore((state) => state.isLoggedIn)
 
+  //Datos de cookie
+  const user = getUser();
   
 
   useEffect(() => {
@@ -59,6 +64,8 @@ function Home() {
       <div className="box_button_open_drawer">
         <Button size="large"> <MenuFoldOutlined /> </Button>
       {isLoginShow ? <Login/> : ""}
+      {isLoginShow ? "" : isLoggedIn ? <Welcome name={user.name} /> : ""}
+      
    
       <Button type="primary" size="large" onClick={() => setIsCartDrawerShow(true)}>
        Cart

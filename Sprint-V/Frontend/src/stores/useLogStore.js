@@ -2,7 +2,7 @@ import { create } from "zustand"
 
 const useLogStore = create((set) => ({
     isLoggedIn: false,
-    setIsLoggedIn: (isLoggedIn) => set(() => ({isLoggedIn}))
+    toggleIsLoggedIn: () => set(state => ({isLoggedIn: state.isLoggedIn ? false : true}))
 }))
 
 export { useLogStore }

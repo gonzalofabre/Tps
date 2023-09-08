@@ -6,36 +6,43 @@ import axios from "axios";
 import sleep from "../../utils/sleep";
 import { Button } from "antd";
 
-import {  CloseOutlined} from "@ant-design/icons"
+import { CloseOutlined } from "@ant-design/icons";
 
-import {useLoginStore } from '../../stores/useLoginStore'
-import { useLogStore } from '../../stores/useLogStore';
-import Cookies from 'universal-cookie';
+import { useLoginStore } from "../../stores/useLoginStore";
+import { useLogStore } from "../../stores/useLogStore";
+import Cookies from "universal-cookie";
+import {createCookies} from "../cookieHandler/cookieHandler";
 
 function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { setIsLoginShow } = useLoginStore();
-  const { setIsLoggedIn } = useLogStore();
+  const [isInvalidPassword, setIsInvalidPassword] = useState(false);
+  const [isUserNotFound, setIsUserNotFound] = useState(false);
+  const { toggleLoginShow } = useLoginStore();
+  const { toggleIsLoggedIn } = useLogStore();
   return (
     <>
       <div className="login">
-        <button className="close_button" onClick={() => setIsLoginShow(false)}><CloseOutlined  /> </button>
-        <label htmlFor="userName">Nombre de usuario</label>
+        <button className="close_button" onClick={() => toggleLoginShow() }>
+          <CloseOutlined />{" "}
+        </button>
+        <label htmlFor="userName">Username <span className="span">{isUserNotFound? '*User not Found' : ""}</span></label>
         <input
           value={userName}
           type="text"
           id="userName"
           onChange={(e) => setUserName(e.target.value)}
         />
-        <label htmlFor="password">Contraseña </label>
+        <label htmlFor="password">Password <span className="span">{isInvalidPassword ? '*Invalid Password' : ""}</span> </label>
         <input
           value={password}
           type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button type="primary" loading={isLoading ? true : false}
+        <Button
+          type="primary"
+          loading={isLoading ? true : false}
           onClick={async () => {
             setIsLoading(true);
             const data = {
@@ -45,31 +52,30 @@ function Login() {
             try {
               const response = await axios.post("/api/users/login", data);
               console.log(response.status);
-              console.log(response.data.data.userData);
-              const {
-                id,
-                adress,
-                tel,
-                userName,
-                name,
-                lastName,
-                rol,
-              } = response.data.data.userData;
-              await sleep(3000);
-              const cookies = new Cookies();
-              const oneHour = 60*60;
-              cookies.set('id', id, [{path: "/"},{ maxAge: oneHour}]);
-              cookies.set('adress', adress, [{path: "/"},{ maxAge: oneHour}]);
-              cookies.set('tel', tel, [{path: "/"},{ maxAge: oneHour}]);
-              cookies.set('userName', userName , [{path: "/"},{ maxAge: oneHour}]);
-              cookies.set('name', name, [{path: "/"},{ maxAge: oneHour}]);
-              cookies.set('lastName', lastName, [{path: "/"},{ maxAge: oneHour}]);
-              cookies.set('rol', rol, [{path: "/"},{ maxAge: oneHour}]);
-
+              if (response.status === 200) {
+                const { id, adress, tel, userName, name, lastName, rol } =
+                  response.data.data.userData;
+                await sleep(3000);
+                setIsInvalidPassword(false);
+                setIsUserNotFound(false);
+                createCookies(id, adress, tel, userName, name, lastName, rol);
+                 toggleLoginShow();
+                 toggleIsLoggedIn();
+                
+              }
             } catch (error) {
-              console.error(error.response.status);
+              if(error.response.status === 401) {
+                setIsInvalidPassword(true);
+                setIsUserNotFound(false)
+              } else if (error.response.status === 404) {
+                setIsUserNotFound(true);
+                setIsInvalidPassword(false);
+        
+              } else {
+                console.error(error.response.status)
+              }
             }
-            setIsLoggedIn(true);
+            
             setIsLoading(false);
           }}
         >

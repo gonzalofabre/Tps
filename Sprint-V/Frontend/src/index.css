@@ -93,6 +93,20 @@
   min-width: 30%;
   margin: auto;
 }
+.welcome {
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 30px;
+  align-items: center;
+  margin: auto;
+  padding: 20px;
+  min-width: 30%;
+}
+.span {
+  color: red;
+  font-size: smaller;
+}
 .login input {
   height: 15px;
   padding:5px;
