@@ -5,8 +5,9 @@ import Login from "../../components/Login/Login";
 import Card from "../../components/Card/Card";
 import peek from "../../utils/peek";
 import { Button, Drawer } from "antd";
-import { ShoppingCartOutlined } from "@ant-design/icons";
+import { ShoppingCartOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import { useLoginStore } from '../../stores/useLoginStore'
+import { useLogStore } from '../../stores/useLogStore'
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -56,6 +57,7 @@ function Home() {
       ></Drawer>
 
       <div className="box_button_open_drawer">
+        <Button size="large"> <MenuFoldOutlined /> </Button>
       {isLoginShow ? <Login/> : ""}
    
       <Button type="primary" size="large" onClick={() => setIsCartDrawerShow(true)}>

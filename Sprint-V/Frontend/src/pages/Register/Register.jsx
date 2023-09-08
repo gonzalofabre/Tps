@@ -18,9 +18,22 @@ function Register() {
 
     const [isMatchPassword, setIsMatchPassword] = useState("");
 
-    function buttonSubmit (e) {
+     async function buttonSubmit (e) {
         e.preventDefault();
-        console.log(name, lastName, userName, adress, tel, password);
+        const data = {
+            name,
+            lastName,
+            userName,
+            adress,
+            tel,
+            password
+        };
+        try {
+            const response = await axios.post("api/users/register", data);
+            console.log(response.status);
+        } catch (error) {
+            console.error(error.response.status)
+        }
     }
   return (
     <>

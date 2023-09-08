@@ -2,13 +2,31 @@ const { error } = require("console");
 const Users = require("../models/users");
 module.exports = {
   register: async (req, res) => {
-    const { userName, password, tel, adress } = req.body;
+    const { userName, name, lastName, password, tel, adress } = req.body;
+    const rol = "user";
 
-    const userRegistered = await Users.create({ email, password, tel, adress });
+    try {
+      const userRegistered = await Users.create({
+        userName,
+        name,
+        lastName,
+        password,
+        tel,
+        adress,
+        rol,
+      });
 
-    return res
-      .status(201)
-      .json({ message: "Usuario creado", data: userRegistered });
+      if(userRegistered) {return res
+        .status(201)
+        .json({ message: "Usuario creado", data: userRegistered });} else {
+          return res.status(400).json({message: "Bad request, invalid data"})
+        }
+    } catch (error) {
+      console.error(error);
+      return res
+        .status(500)
+        .json({ status: 500, message: "Error interno del servidor" });
+    }
   },
   login: async (req, res) => {
     try {

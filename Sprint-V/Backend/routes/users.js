@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const userMiddleware = require('../middlewares/userMiddlewares')
-const { login } = require('../controllers/userControllers');
+const { login, register } = require('../controllers/userControllers');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -9,5 +9,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/login', login);
+router.post('/register', register);
 
 module.exports = router;

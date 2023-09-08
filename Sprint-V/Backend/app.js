@@ -4,7 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 // const bodyParser = require('body-parser');
-const sessions = require('express-session');
+// const sessions = require('express-session');
 const cors = require('cors');
 
 const { sequelize } = require('./db/database');
@@ -26,7 +26,7 @@ const productsRouter = require('./routes/products')
 const app = express();
 app.use(cors());
 
-const oneDay = 1000*60*60*24;
+// const oneDay = 1000*60*60*24;
 
 
 // view engine setup
@@ -37,12 +37,12 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 //agregando sessions 
-app.use(sessions({
-  secret: "12345",
-  saveUninitialized: true,
-  cookie: {maxAge: oneDay},
-  resave: false
-}))
+// app.use(sessions({
+//   secret: "12345",
+//   saveUninitialized: true,
+//   cookie: {maxAge: oneDay},
+//   resave: false
+// }))
 app.use(cookieParser());
 // app.use(bodyParser.urlencoded({extended: true}));
 // app.use(bodyParser.json());
