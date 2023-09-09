@@ -18,14 +18,14 @@ module.exports = {
 
       if(userRegistered) {return res
         .status(201)
-        .json({ message: "Usuario creado", data: userRegistered });} else {
+        .json({ message: "User Created", data: userRegistered });} else {
           return res.status(400).json({message: "Bad request, invalid data"})
         }
     } catch (error) {
       console.error(error);
       return res
         .status(500)
-        .json({ status: 500, message: "Error interno del servidor" });
+        .json({ status: 500, message: "Internal server error" });
     }
   },
   login: async (req, res) => {
@@ -36,8 +36,10 @@ module.exports = {
       if (!userFound) {
         return res
           .status(404)
-          .json({ status: 404, message: "Usuario no encontrado" });
+          .json({ status: 404, message: "User not found" });
       }
+
+    
 
       if (userFound.password === password) {
         return userFound.rol === "admin"

@@ -7,7 +7,7 @@ Products.init(
   {
     title: DataTypes.STRING,
     id:{type:DataTypes.INTEGER,primaryKey:true, autoIncrement:true},
-    desc: DataTypes.STRING,
+    description: DataTypes.STRING,
     category: DataTypes.STRING,
     price: DataTypes.INTEGER,
     image: DataTypes.STRING
@@ -15,6 +15,7 @@ Products.init(
   {
     sequelize,
     modelName: "products",
+    timestamps: false,
   }
 );
 module.exports = Products;

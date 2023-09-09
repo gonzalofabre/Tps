@@ -6,6 +6,8 @@ const logger = require('morgan');
 // const bodyParser = require('body-parser');
 // const sessions = require('express-session');
 const cors = require('cors');
+const readDb = require('./utils/readDb');
+// const createDb = require('./utils/createDb');
 
 const { sequelize } = require('./db/database');
 const Users = require('./models/users');
@@ -67,5 +69,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// console.log(readDb().products);
+// createDb(); <--- DANGER 
 
 module.exports = app;
