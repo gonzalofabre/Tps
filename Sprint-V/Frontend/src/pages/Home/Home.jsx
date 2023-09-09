@@ -4,18 +4,23 @@ import Header from "../../components/Header/Header";
 import Login from "../../components/Login/Login";
 import Welcome from "../../components/Welcome/Welcome";
 import Card from "../../components/Card/Card";
+import OrderButton from "../../components/OrderButton/OrderButton";
 import { Cart } from "../../components/Cart/Cart";
 import peek from "../../utils/peek";
 import { Button, Drawer } from "antd";
 import { ShoppingCartOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import { useLoginStore } from "../../stores/useLoginStore";
 import { useLogStore } from "../../stores/useLogStore";
-import { getUser } from "../../components/cookieHandler/cookieHandler";
+import { getUser } from "../../functions/cookieHandler";
 import { useCartStore } from "../../stores/useCartStore";
+// import useOrderMutation from '../../hooks/useOrderMutation';
+import createOrder from "../../functions/createOrder";
 
 function Home() {
   const [products, setProducts] = useState([]);
   const globalProducts = useCartStore((state) => state.products);
+  //Mutation Order
+  // const {createOrder} = useOrderMutation()
 
   //Filters
 
@@ -37,6 +42,8 @@ function Home() {
   //Datos de cookie
   const userCookies = getUser();
 
+  
+
   useEffect(() => {
     fetch(peek("http://localhost:3000/products"))
       .then((data) => peek(data.json()))
@@ -55,18 +62,14 @@ function Home() {
         title={
           <div className="drawer_buy">
             <p>Your Products:</p>
-            <Button
-              style={{
-                padding: "0px 40px",
-                alignItems: "center",
-                display: "flex",
-                justifyContent: "center",
-              }}
+            {/* <Button
               type="primary"
               size="large"
+              onClick={() => createOrder(globalProducts)}
             >
               Buy!
-            </Button>
+            </Button> */}
+            <OrderButton/>
           </div>
         }
         onClose={() => setIsCartDrawerShow(false)}

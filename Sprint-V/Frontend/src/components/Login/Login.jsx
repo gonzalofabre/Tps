@@ -11,7 +11,7 @@ import { CloseOutlined } from "@ant-design/icons";
 import { useLoginStore } from "../../stores/useLoginStore";
 import { useLogStore } from "../../stores/useLogStore";
 import Cookies from "universal-cookie";
-import {createCookies} from "../cookieHandler/cookieHandler";
+import {createCookies} from "../../functions/cookieHandler";
 
 function Login() {
   const [userName, setUserName] = useState("");

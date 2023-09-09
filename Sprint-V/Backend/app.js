@@ -7,7 +7,7 @@ const logger = require('morgan');
 // const sessions = require('express-session');
 const cors = require('cors');
 const readDb = require('./utils/readDb');
-// const createDb = require('./utils/createDb');
+// const createDb = require('./utils/createDb'); <--- Danger
 
 const { sequelize } = require('./db/database');
 const Users = require('./models/users');
@@ -23,7 +23,8 @@ try {
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const productsRouter = require('./routes/products')
+const productsRouter = require('./routes/products');
+const ordersRouter = require('./routes/orders');
 
 const app = express();
 app.use(cors());
@@ -53,6 +54,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/products', productsRouter);
+app.use('/api/orders', ordersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -72,5 +74,7 @@ app.use(function(err, req, res, next) {
 
 // console.log(readDb().products);
 // createDb(); <--- DANGER 
+
+
 
 module.exports = app;

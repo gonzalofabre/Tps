@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Home from "./pages/Home/Home";
 import Register from "./pages/Register/Register";
 import Login from "./components/Login/Login";
+import Success from "./pages/Success/Success";
 import peek from "./utils/peek";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path='/register' element= {<Register />} />
+          <Route path='/success' element= {<Success />} />
         </Routes>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />

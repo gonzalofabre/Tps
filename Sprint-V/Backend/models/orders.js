@@ -5,13 +5,14 @@ class Orders extends Model {}
 
 Orders.init(
   {
-    idUser: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER,
     id:{type:DataTypes.INTEGER,primaryKey:true, autoIncrement:true},
     products: DataTypes.STRING,
   },
   {
     sequelize,
-    modelName: "ordenes",
+    modelName: "orders",
+    timestamps: false,
   }
 );
 module.exports = Orders;
