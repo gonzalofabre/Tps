@@ -1,30 +1,44 @@
 import { useCartStore } from "../../stores/useCartStore";
-import { List, Avatar } from 'antd'
-import './styles.css'
+import { List, Avatar, Button } from "antd";
+import { CloseOutlined } from "@ant-design/icons"
+import { } from '../../stores/useCartStore'
+import "./styles.css";
 
 const Cart = () => {
   const globalProducts = useCartStore((state) => state.products);
+  const actions = useCartStore(state => state.actions)
+
   return (
-    <List
+    <><div className="drawer_total">
+    <h2>Total</h2>
+    <p>$ {globalProducts
+    .map((product) => product.price)
+    .reduce((a,b) => a + b, 0 )
+    .toFixed(2)}</p>
+  </div>
+  <List
       itemLayout="horizontal"
       dataSource={globalProducts}
       renderItem={(item, index) => (
         <List.Item>
           <List.Item.Meta
-            avatar={
-              <Avatar
-              className="avatar"
-                src={item.image}
-              />
+            avatar={<Avatar className="avatar" src={item.image} />}
+            title={<div style={{display: "flex", justifyContent: "space-between"}}>
+              <a
+                className="cart_list_item_title"
+                href="https://ant.design"
+              >{`${item.title.slice(0, 25)}...`}</a>
+              <Button type="primary" size="small" style={{backgroundColor: "white"}} onClick={() => actions.removeProduct(index)}> <CloseOutlined style= {{ color: "red" }}  /> </Button>
+              </div>
             }
-            title={<a className="cart_list_item_title" href="https://ant.design">{`${item.title.slice(0, 35)}...`}</a>}
             description={<p className="cart_list_item_price">{item.price}</p>}
           />
-          
         </List.Item>
-        
       )}
     />
+  
+  </>
+    
   );
 };
 export { Cart };

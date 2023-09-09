@@ -55,21 +55,34 @@ function Home() {
         title={
           <div className="drawer_buy">
             <p>Your Products:</p>
-            <Button>Buy!</Button>
+            <Button
+              style={{
+                padding: "0px 40px",
+                alignItems: "center",
+                display: "flex",
+                justifyContent: "center",
+              }}
+              type="primary"
+              size="large"
+            >
+              Buy!
+            </Button>
           </div>
         }
         onClose={() => setIsCartDrawerShow(false)}
         open={isCartDrawerShow}
       >
         <Cart></Cart>
-        <div className="drawer_total">
-          <h2>Total</h2>
-          <p> 123133333333333323</p>
-        </div>
       </Drawer>
 
       <div className="box_button_open_drawer">
-        <Button size="large">
+        <Button
+          style={{
+            margin: "0.3rem 1rem 0.3rem 0.3rem",
+            padding: "6.428571428571429px 1.6rem",
+          }}
+          size="large"
+        >
           {" "}
           <MenuFoldOutlined />{" "}
         </Button>
@@ -83,6 +96,10 @@ function Home() {
         )}
 
         <Button
+          style={{
+            margin: "0.3rem 1rem 0.3rem 0.3rem",
+            padding: "6.428571428571429px 1.6rem",
+          }}
           type="primary"
           size="large"
           onClick={() => setIsCartDrawerShow(true)}
@@ -168,8 +185,8 @@ function Home() {
                 imageUrl={product.image}
                 description={product.description}
                 price={product.price}
-                product = {product}
-                id = {product.id}
+                product={product}
+                id={product.id}
               ></Card>
             ))}
         </div>
