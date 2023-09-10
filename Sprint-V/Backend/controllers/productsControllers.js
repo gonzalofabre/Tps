@@ -27,18 +27,18 @@ module.exports = {
     }
   },
   updateProduct: async (req, res) => {
-    const productId = req.params.id 
-    const { title, description, image, category, price } = req.body
+    const { newTitle, newDescription, newImage, newCategory, newPrice, idProduct } = req.body
+
     try {
-      const product = await Products.findByPk(productId);
+      const product = await Products.findByPk(idProduct);
       if(!product){
         return res.status(404).json({message: "Product not found "});
       }
-      product.title = title;
-      product.description = description;
-      product.image = image;
-      product.category = category;
-      product.price = price;
+      product.title = newTitle;
+      product.description = newDescription;
+      product.image = newImage;
+      product.category = newCategory;
+      product.price = newPrice;
 
       await product.save();
 

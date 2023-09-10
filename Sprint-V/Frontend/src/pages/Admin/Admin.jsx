@@ -18,7 +18,7 @@ import { useCartStore } from "../../stores/useCartStore";
 import { useAdminStore } from "../../stores/useAdminStore";
 // import useOrderMutation from '../../hooks/useOrderMutation';
 
-function Home() {
+function Admin() {
   const [products, setProducts] = useState([]);
   const globalProducts = useCartStore((state) => state.products);
 
@@ -170,4 +170,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Admin;

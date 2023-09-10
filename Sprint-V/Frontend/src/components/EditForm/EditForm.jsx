@@ -1,15 +1,68 @@
 import './styles.css';
 import { Button } from "antd";
-import useEditStore from "../../stores/useEditStore"; // Importa el estado global
+import useEditStore from "../../stores/useEditStore";
+import sleep from '../../utils/sleep'; 
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { notification } from "antd";
+import { CheckOutlined, ExclamationOutlined } from "@ant-design/icons";
+const openAddNotification = (title, image) =>
+  notification.open({
+    message: "Product updated!",
+    description: title,
+    placement: "bottomLeft",
+    icon: <img src={image} style={{width: "30px", height: "30px", borderRadius: "50%"}} />,
+  });
 
 function EditForm() {
-  // Obtén el objeto product del estado global
   const editStore = useEditStore();
   const { product } = editStore;
+  const [isLoading, setIsLoading] = useState(false);
+
+  // States cambiados
+  const [newTitle, setNewTitle] = useState(product.title);
+  const [newPrice, setNewPrice] = useState(product.price);
+  const [newCategory, setNewCategory] = useState(product.category);
+  const [newDescription, setNewDescription] = useState(product.description);
+  const [newImage, setNewImage] = useState(product.image);
+
+  useEffect(() => {
+    setNewTitle(product.title);
+    setNewPrice(product.price);
+    setNewCategory(product.category);
+    setNewDescription(product.description);
+    setNewImage(product.image);
+  }, [product]);
+
+  async function buttonSubmit(e) {
+    setIsLoading(true);
+    e.preventDefault();
+    const data = {
+      idProduct: product.id,
+      newTitle,
+      newPrice,
+      newDescription,
+      newCategory,
+      newImage,
+    };
+
+    try {
+      const response = await axios.put("http://localhost:3000/products", data);
+      console.log(response.status);
+      console.log('Product updated: ', response.data.data);
+      const { image, title } = response.data.data;
+      await sleep(3000);
+      openAddNotification(title, image);
+    } catch (error) {
+      console.error(error.response.status);
+    }
+
+    setIsLoading(false);
+  }
 
   return (
     <div className='edit_box'>
-      <img src={product.image} alt="" />
+      <img style={{width: "200px", height: "200px", borderRadius: "30%"}} src={product.image} alt="" />
       <div className="edit_input">
         <label htmlFor="edit-new-title">New Title</label>
         <textarea
@@ -17,7 +70,8 @@ function EditForm() {
           id="edit-new-title"
           cols="25"
           rows="2"
-          defaultValue={product.title} // Establece el valor por defecto desde el estado global
+          value={newTitle}
+          onChange={(e) => setNewTitle(e.target.value)}
         />
       </div>
       <div className="edit_input">
@@ -26,7 +80,8 @@ function EditForm() {
           type="number"
           name="edit-new-price"
           id="edit-new-price"
-          defaultValue={product.price} // Establece el valor por defecto desde el estado global
+          value={newPrice}
+          onChange={(e) => setNewPrice(e.target.value)}
         />
       </div>
       <div className="edit_input_description">
@@ -36,7 +91,8 @@ function EditForm() {
           id="edit-new-description"
           cols="40"
           rows="5"
-          defaultValue={product.description} // Establece el valor por defecto desde el estado global
+          value={newDescription}
+          onChange={(e) => setNewDescription(e.target.value)}
         />
       </div>
       <div className="edit_input">
@@ -45,7 +101,8 @@ function EditForm() {
           type="text"
           name="edit-new-category"
           id="edit-new-category"
-          defaultValue={product.category} // Establece el valor por defecto desde el estado global
+          value={newCategory}
+          onChange={(e) => setNewCategory(e.target.value)}
         />
       </div>
       <div className="edit_input">
@@ -55,11 +112,12 @@ function EditForm() {
           id="edit-new-image"
           cols="25"
           rows="2"
-          defaultValue={product.image} // Establece el valor por defecto desde el estado global
+          value={newImage}
+          onChange={(e) => setNewImage(e.target.value)}
         />
       </div>
       <div className='edit_button'>
-        <Button style={{width:"100px", textAlign:"center", fontWeight: "bold" }} type='primary' size='large'>Edit!</Button>
+        <Button loading={isLoading ? true : false} style={{width:"100px", textAlign:"center", fontWeight: "bold" }} type='primary' size='large' onClick={buttonSubmit} >Edit!</Button>
       </div>
     </div>
   );

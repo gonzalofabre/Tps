@@ -23,19 +23,7 @@ const { getProductsController, updateProduct} = require('../controllers/products
 
 router.get('/', readAllProducts, getProductsController );
 
-router.patch('/', updateProduct
-// function(req,res,next) {
-//     const { body } = req
-//     const createResponse = updateProduct(body.id,body.name, body.description);
-
-//     if(createResponse){
-//         res.send('Updated');
-
-//     }else {
-//         res.send('ERROR');
-//     }
-// }
-)
+router.put('/', updateProduct)
 
 
 module.exports = router;
