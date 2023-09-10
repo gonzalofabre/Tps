@@ -1,6 +1,7 @@
 // import { useState } from 'react'
 import "./App.css";
 import { useEffect, useState } from "react";
+import Admin from './pages/Admin/Admin'
 import Home from "./pages/Home/Home";
 import Register from "./pages/Register/Register";
 import Login from "./components/Login/Login";
@@ -17,7 +18,8 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={ <Home />} />
+          <Route path="/admin" element = { <Admin /> } />
           <Route path="/login" element={<Login />} />
           <Route path='/register' element= {<Register />} />
           <Route path='/success' element= {<Success />} />

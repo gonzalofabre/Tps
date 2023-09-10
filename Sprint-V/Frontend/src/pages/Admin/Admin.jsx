@@ -4,6 +4,7 @@ import Header from "../../components/Header/Header";
 import Login from "../../components/Login/Login";
 import Welcome from "../../components/Welcome/Welcome";
 import Card from "../../components/Card/Card";
+import Logout from "../../components/Logout/Logout";
 import OrderButton from "../../components/OrderButton/OrderButton";
 import { Cart } from "../../components/Cart/Cart";
 import peek from "../../utils/peek";
@@ -14,10 +15,8 @@ import { useLogStore } from "../../stores/useLogStore";
 import { getUser } from "../../functions/cookieHandler";
 import { useCartStore } from "../../stores/useCartStore";
 // import useOrderMutation from '../../hooks/useOrderMutation';
-import createOrder from "../../functions/createOrder";
 
 function Home() {
-
   const [products, setProducts] = useState([]);
   const globalProducts = useCartStore((state) => state.products);
 
@@ -53,64 +52,23 @@ function Home() {
       });
   }, []);
 
-  useEffect(() => {
-    userCookies.id === undefined ? toggleIsLoggedIn(false):toggleIsLoggedIn(true);
-  }, [userCookies.id]);
 
   return (
     <>
-      {console.log(isLoggedIn)}
-      {console.log(userCookies.id)}
-      <Header />
+    <div className="header">
+      <div className="header_logo">
+        <img src="https://placekitten.com/184/84"></img>
 
-      <Drawer
-        title={
-          <div className="drawer_buy">
-            <p>Your Products:</p>
-            {/* <Button
-              type="primary"
-              size="large"
-              onClick={() => createOrder(globalProducts)}
-            >
-              Buy!
-            </Button> */}
-            <OrderButton />
-          </div>
-        }
-        onClose={() => setIsCartDrawerShow(false)}
-        open={isCartDrawerShow}
-      >
-        <Cart></Cart>
-      </Drawer>
-
-      <div className="box_button_open_drawer">
-        <Button
-          style={{
-            margin: "0.3rem 1rem 0.3rem 0.3rem",
-            padding: "6.428571428571429px 1.6rem",
-          }}
-          size="large"
-        >
-          {" "}
-          <MenuFoldOutlined />{" "}
-        </Button>
-        {isLoginShow ? <Login /> : ""}
-        {isLoggedIn ? <Welcome name={userCookies.name} /> : ""}
-
-        <Button
-          style={{
-            margin: "0.3rem 1rem 0.3rem 0.3rem",
-            padding: "6.428571428571429px 1.6rem",
-          }}
-          type="primary"
-          size="large"
-          onClick={() => setIsCartDrawerShow(true)}
-        >
-          Cart
-          <ShoppingCartOutlined />
-        </Button>
+        <h1> My E-commerce</h1>
       </div>
+      <div className="header_links">
+      <Logout />
 
+        </div>
+    </div>
+ <Welcome name={userCookies.name} />
+
+ 
       <div className="root">
         <div className="filters">
           <h3>Buscar por :</h3>

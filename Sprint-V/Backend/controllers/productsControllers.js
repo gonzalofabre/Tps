@@ -26,7 +26,29 @@ module.exports = {
         .json({ status: 500, message: "Internal Server Error" });
     }
   },
+  // updateProduct: async (req, res) => {
+  //   const productId = req.params.id 
+  //   const { title, description, image, category, price } = req.body
+  //   try {
+  //     const product = await Products.findByPk(productId);
+  //     if(!product){
+
+  //     }
+  //     const updatedProduct = await Products.update({
+
+  //     }{
+  //       title,
+  //       description,
+  //       category,
+  //       image,
+  //       price,
+  //     });
+  // },
+
+  // Controllers ...
   getProductsController: async (req, res) => {
     return res.status(req.statusCode).json(req.dataToSend)
   },
+
+  
 };

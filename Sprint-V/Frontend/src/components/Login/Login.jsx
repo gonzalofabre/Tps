@@ -1,17 +1,14 @@
 import { useState } from "react";
-import Header from "../Header/Header";
 // import peek from "../utils/peek";
 import axios from "axios";
-// import { redirect } from "react-router-dom";
 import sleep from "../../utils/sleep";
 import { Button } from "antd";
-
 import { CloseOutlined } from "@ant-design/icons";
-
 import { useLoginStore } from "../../stores/useLoginStore";
 import { useLogStore } from "../../stores/useLogStore";
-import Cookies from "universal-cookie";
+import { useAdminStore } from "../../stores/useAdminStore";
 import {createCookies} from "../../functions/cookieHandler";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [userName, setUserName] = useState("");
@@ -21,6 +18,9 @@ function Login() {
   const [isUserNotFound, setIsUserNotFound] = useState(false);
   const { toggleLoginShow } = useLoginStore();
   const { toggleIsLoggedIn } = useLogStore();
+  const navigate = useNavigate();
+  const isAdminLogged = useAdminStore((state) => state.isAdminLogged);
+  const { setIsAdminLogged } = useAdminStore();
   return (
     <>
       <div className="login">
@@ -58,9 +58,16 @@ function Login() {
                 await sleep(3000);
                 setIsInvalidPassword(false);
                 setIsUserNotFound(false);
-                createCookies(id, adress, tel, userName, name, lastName, rol);
+                if(rol != 'admin'){
+
+                  createCookies(id, adress, tel, userName, name, lastName, rol);
                  toggleLoginShow();
-                 toggleIsLoggedIn();
+                } else {
+                  createCookies(id, adress, tel, userName, name, lastName, rol );
+                  setIsAdminLogged(true);
+                  navigate("/admin");
+                }
+                
                 
               }
             } catch (error) {

@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useLoginStore } from "../../stores/useLoginStore";
 import { useLogStore } from "../../stores/useLogStore";
 
+import Logout from "../Logout/Logout";
+
 function Header() {
   const { toggleLoginShow } = useLoginStore();
   const isLoggedIn = useLogStore((state) => state.isLoggedIn);
@@ -19,13 +21,7 @@ function Header() {
           Home
         </Link>
         {isLoggedIn ? (
-          <Link
-            className="header_links_link"
-            to={"/"}
-            onClick={() => toggleIsLoggedIn()}
-          >
-            Logout
-          </Link>
+          <Logout/>
         ) : (
           <Link
             className="header_links_link"

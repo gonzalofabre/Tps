@@ -1,21 +1,12 @@
 import {getUser } from './cookieHandler';
 import axios from 'axios';
-import { useCartStore} from '../stores/useCartStore'
-import { notification } from "antd";
-import { CheckOutlined, ExclamationOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 
-
-const openOrderNotification = () =>
-  notification.open({
-    message: "Product added to the Cart",
-    description: title,
-    placement: "bottomLeft",
-    icon: <CheckOutlined style={{ color: "green" }} />,
-  })
 
 
 async function createOrder (globalProducts) {
+    const navigate = useNavigate();
     
     const userId = getUser().id;
 

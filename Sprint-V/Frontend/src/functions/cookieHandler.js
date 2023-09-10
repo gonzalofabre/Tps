@@ -29,6 +29,15 @@ function getUser() {
     return userCookies
 }
 
+function deleteCookies () {
+    const cookies = new Cookies ();
+    const cookieNames = ['id', 'adress', 'tel', 'userName', 'name', 'lastName', 'rol']
 
-export { getUser, createCookies}
+    cookieNames.forEach(cookieName => {
+        cookies.remove(cookieName, {path: '/'});
+    })
+
+}
+
+export { getUser, createCookies, deleteCookies}
 

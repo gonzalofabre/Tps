@@ -2,39 +2,47 @@ import "./styles.css";
 import Header from "../../components/Header/Header";
 import axios from "axios";
 import { useState } from "react";
+import sleep from "../../utils/sleep";
+import { Button } from "antd";
 
 function Register() {
-    const [name, setName ] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-    const [lastName, setLastName ] = useState("");
+  const [name, setName] = useState("");
 
-    const [userName, setUserName ] = useState("");
+  const [lastName, setLastName] = useState("");
 
-    const [adress, setAdress ] = useState("");
+  const [userName, setUserName] = useState("");
 
-    const [tel, setTel ] = useState("");
+  const [adress, setAdress] = useState("");
 
-    const [password, setPassword ] = useState("");
+  const [tel, setTel] = useState("");
 
-    const [isMatchPassword, setIsMatchPassword] = useState("");
+  const [password, setPassword] = useState("");
 
-     async function buttonSubmit (e) {
-        e.preventDefault();
-        const data = {
-            name,
-            lastName,
-            userName,
-            adress,
-            tel,
-            password
-        };
-        try {
-            const response = await axios.post("api/users/register", data);
-            console.log(response.status);
-        } catch (error) {
-            console.error(error.response.status)
-        }
+  const [isMatchPassword, setIsMatchPassword] = useState("");
+
+  async function buttonSubmit(e) {
+    setIsLoading(true)
+    e.preventDefault();
+    const data = {
+      name,
+      lastName,
+      userName,
+      adress,
+      tel,
+      password,
+    };
+    
+    try {
+      const response = await axios.post("api/users/register", data);
+      console.log(response.status);
+    } catch (error) {
+      console.error(error.response.status);
     }
+    sleep(3000);
+    setIsLoading(false)
+  }
   return (
     <>
       <Header />
@@ -50,49 +58,106 @@ function Register() {
               <label htmlFor="name">
                 Name<span className="item_span">*</span>
               </label>
-              <input value= {name} className="input" id="name" type="text" name="fname" onChange={(e) => setName(e.target.value)} />
+              <input
+                value={name}
+                className="input"
+                id="name"
+                type="text"
+                name="fname"
+                onChange={(e) => setName(e.target.value)}
+              />
             </div>
             <div className="item">
               <label htmlFor="lastName">
                 Last Name <span className="item_span">*</span>
               </label>
-              <input value={lastName} className="input" id="lastName" type="text" name="lastName" onChange={(e) => setLastName(e.target.value)} />
+              <input
+                value={lastName}
+                className="input"
+                id="lastName"
+                type="text"
+                name="lastName"
+                onChange={(e) => setLastName(e.target.value)}
+              />
             </div>
             <div className="item">
               <label htmlFor="userName">
                 User Name <span className="item_span">*</span>
               </label>
-              <input value={userName} className="input" id="userName" type="text" name="userName" onChange={(e) => setUserName(e.target.value)} />
+              <input
+                value={userName}
+                className="input"
+                id="userName"
+                type="text"
+                name="userName"
+                onChange={(e) => setUserName(e.target.value)}
+              />
             </div>
             <div className="item">
               <label htmlFor="password">
                 password <span className="item_span">*</span>
               </label>
-              <input value={password} className="input" id="password" type="password" name="password" onChange={(e) => setPassword(e.target.value)} />
+              <input
+                value={password}
+                className="input"
+                id="password"
+                type="password"
+                name="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
             <div className="item">
               <label htmlFor="password-confirm">
-                Confirm your Password <span className="item_span">*</span>    <span className={isMatchPassword === 'Ok' ? 'item_span_green' : 'item_span'}>{isMatchPassword}</span>
+                Confirm your Password <span className="item_span">*</span>{" "}
+                <span
+                  className={
+                    isMatchPassword === "Ok" ? "item_span_green" : "item_span"
+                  }
+                >
+                  {isMatchPassword}
+                </span>
               </label>
-              <input className="input" id="password-confirm" type="password" name="password-confirm" onChange={(e) => e.target.value === password ? setIsMatchPassword('Ok') : setIsMatchPassword('Password does not match')}/>
+              <input
+                className="input"
+                id="password-confirm"
+                type="password"
+                name="password-confirm"
+                onChange={(e) =>
+                  e.target.value === password
+                    ? setIsMatchPassword("Ok")
+                    : setIsMatchPassword("Password does not match")
+                }
+              />
             </div>
 
             <div className="item">
               <label htmlFor="adress">
                 Adress <span className="item_span">*</span>
               </label>
-              <input value={adress} className="input" id="adress" type="text" name="adress" onChange={(e) => setAdress(e.target.value)} />
+              <input
+                value={adress}
+                className="input"
+                id="adress"
+                type="text"
+                name="adress"
+                onChange={(e) => setAdress(e.target.value)}
+              />
             </div>
             <div className="item">
               <label htmlFor="tel">
                 Telephone Number <span className="item_span">*</span>
               </label>
-              <input value={tel} className="input" id="tel" type="number" name="tel" onChange={(e) => setTel(e.target.value)} />
+              <input
+                value={tel}
+                className="input"
+                id="tel"
+                type="number"
+                name="tel"
+                onChange={(e) => setTel(e.target.value)}
+              />
             </div>
             <div className="btn-block">
-              <button className="button" type='submit' onClick={buttonSubmit}>
-                Submit
-              </button>
+              <Button className="button" type="submit" onClick={buttonSubmit}> Submit </Button>
             </div>
           </fieldset>
         </form>
