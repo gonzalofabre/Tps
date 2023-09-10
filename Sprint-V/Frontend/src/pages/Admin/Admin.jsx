@@ -2,8 +2,9 @@ import "../../App.css";
 import { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import Login from "../../components/Login/Login";
+import EditForm from "../../components/EditForm/EditForm";
 import Welcome from "../../components/Welcome/Welcome";
-import Card from "../../components/Card/Card";
+import AdminCard from "../../components/AdminCard/AdminCard";
 import Logout from "../../components/Logout/Logout";
 import OrderButton from "../../components/OrderButton/OrderButton";
 import { Cart } from "../../components/Cart/Cart";
@@ -14,6 +15,7 @@ import { useLoginStore } from "../../stores/useLoginStore";
 import { useLogStore } from "../../stores/useLogStore";
 import { getUser } from "../../functions/cookieHandler";
 import { useCartStore } from "../../stores/useCartStore";
+import { useAdminStore } from "../../stores/useAdminStore";
 // import useOrderMutation from '../../hooks/useOrderMutation';
 
 function Home() {
@@ -32,10 +34,11 @@ function Home() {
   const [filterByCategory, setFilterByCategory] = useState("-");
 
   //Drawer
-  const [isCartDrawerShow, setIsCartDrawerShow] = useState(false);
 
   //Login
   const isLoginShow = useLoginStore((state) => state.isLoginShow);
+  const isEditDrawerShow = useAdminStore((state) => state.isEditDrawerShow);
+  const {setIsEditDrawerShow} = useAdminStore();
   const isLoggedIn = useLogStore((state) => state.isLoggedIn);
   const { toggleIsLoggedIn } = useLogStore();
 
@@ -67,6 +70,17 @@ function Home() {
         </div>
     </div>
  <Welcome name={userCookies.name} />
+ <Drawer
+        title={
+          <div className="drawer_edit">
+            <p>Edit</p>
+          </div>
+        }
+        onClose={() => setIsEditDrawerShow(false)}
+        open={isEditDrawerShow}
+      >
+        <EditForm/>
+      </Drawer>
 
  
       <div className="root">
@@ -139,7 +153,7 @@ function Home() {
                 : product.category === filterByCategory
             )
             .map((product) => (
-              <Card
+              <AdminCard
                 key={`key-${product.title}-${product.id}`}
                 title={product.title}
                 imageUrl={product.image}
@@ -147,7 +161,8 @@ function Home() {
                 price={product.price}
                 product={product}
                 id={product.id}
-              ></Card>
+                category = { product.category}
+              ></AdminCard>
             ))}
         </div>
       </div>

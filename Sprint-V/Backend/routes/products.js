@@ -3,7 +3,7 @@ var router = express.Router();
 const axios = require('axios');
 const peek = require('../utils/peek');
 const {readAllProducts} = require('../middlewares/productsMiddleware');
-const { getProductsController} = require('../controllers/productsControllers');
+const { getProductsController, updateProduct} = require('../controllers/productsControllers');
 
 
 // router.get('/', function(req, res , next) {
@@ -22,6 +22,20 @@ const { getProductsController} = require('../controllers/productsControllers');
 // })
 
 router.get('/', readAllProducts, getProductsController );
+
+router.patch('/', updateProduct
+// function(req,res,next) {
+//     const { body } = req
+//     const createResponse = updateProduct(body.id,body.name, body.description);
+
+//     if(createResponse){
+//         res.send('Updated');
+
+//     }else {
+//         res.send('ERROR');
+//     }
+// }
+)
 
 
 module.exports = router;

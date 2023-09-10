@@ -2,7 +2,9 @@ import { create } from "zustand"
 
 const useAdminStore = create((set) => ({
     isAdminLogged: false,
-    setIsAdminLogged: (isAdminLogged) => set({ isAdminLogged }), 
+    isEditDrawerShow: false,
+    setIsAdminLogged: (isAdminLogged) => set({ isAdminLogged }),
+    setIsEditDrawerShow: (isEditDrawerShow) => set({isEditDrawerShow}), 
   }))
   
   export { useAdminStore }

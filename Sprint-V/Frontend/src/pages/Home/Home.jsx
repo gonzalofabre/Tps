@@ -67,13 +67,6 @@ function Home() {
         title={
           <div className="drawer_buy">
             <p>Your Products:</p>
-            {/* <Button
-              type="primary"
-              size="large"
-              onClick={() => createOrder(globalProducts)}
-            >
-              Buy!
-            </Button> */}
             <OrderButton />
           </div>
         }
