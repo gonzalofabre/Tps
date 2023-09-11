@@ -6,19 +6,20 @@ import {useCartStore} from '../../stores/useCartStore'
 
 
 
+
  
 
 function OrderButton() {
+  const userCookies = getUser();
     const globalProducts = useCartStore((state) => state.products);
     const navigate = useNavigate();
   return (
     <Button
+    disabled= {userCookies.rol === "admin"}
       type="primary"
       size="large"
       onClick={async () => {
-
-
-        const userId = getUser().id;
+          const userId = getUser().id;
       
         const products = globalProducts.map((product) => product.title).join(", ");
       
@@ -36,6 +37,8 @@ function OrderButton() {
         } catch (error) {
           console.error(error.response.status);
         }
+      
+        
       }
 
       }

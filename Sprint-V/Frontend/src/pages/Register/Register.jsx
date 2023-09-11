@@ -4,6 +4,8 @@ import axios from "axios";
 import { useState } from "react";
 import sleep from "../../utils/sleep";
 import { Button } from "antd";
+import { notification } from "antd";
+import { CheckOutlined, ExclamationOutlined } from "@ant-design/icons";
 
 function Register() {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,10 +23,20 @@ function Register() {
   const [password, setPassword] = useState("");
 
   const [isMatchPassword, setIsMatchPassword] = useState("");
+ 
+  const [isErrorSpan, setIsErrorSpan] = useState(false);
 
-  async function buttonSubmit(e) {
+  const openAddNotification = (userName) =>
+  notification.open({
+    message: "Registration Successful",
+    description: userName,
+    placement: "bottomLeft",
+    icon: <CheckOutlined style={{color: "green"}} />,
+  });
+
+  async function buttonSubmit() {
     setIsLoading(true)
-    e.preventDefault();
+    // e.preventDefault();
     const data = {
       name,
       lastName,
@@ -37,17 +49,26 @@ function Register() {
     try {
       const response = await axios.post("api/users/register", data);
       console.log(response.status);
+      if(response.status === 201) {
+        await sleep(3000);
+        openAddNotification(userName)
+      } else if (response.status === 400) {
+        setIsErrorSpan(true)
+      }
     } catch (error) {
       console.error(error.response.status);
+      
+
     }
-    sleep(3000);
+    setIsErrorSpan(false)
+    
     setIsLoading(false)
   }
   return (
     <>
       <Header />
       <div className="testbox">
-        <form className="form" action="">
+        <div className="form" action="">
           <div className="banner">
             <h1 className="h1">Register</h1>
           </div>
@@ -156,11 +177,12 @@ function Register() {
                 onChange={(e) => setTel(e.target.value)}
               />
             </div>
+            {isErrorSpan ? <span>Please complete all required fields</span> : ""}
             <div className="btn-block">
-              <Button className="button" type="submit" onClick={buttonSubmit}> Submit </Button>
+              <Button loading={isLoading ? true : false} className="button" type="submit" onClick={buttonSubmit}> Submit </Button>
             </div>
           </fieldset>
-        </form>
+        </div>
       </div>
     </>
   );

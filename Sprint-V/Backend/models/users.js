@@ -11,7 +11,7 @@ Users.init(
     userName: DataTypes.STRING,
     password: DataTypes.STRING,
     adress: DataTypes.STRING,
-    tel: DataTypes.INTEGER,
+    tel: DataTypes.STRING,
     rol: DataTypes.STRING
   },
   {

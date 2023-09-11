@@ -67,9 +67,15 @@ function Home() {
 
       <Drawer
         title={
+          <div>
           <div className="drawer_buy">
-            <p>Your Products:</p>
+            <p>{userCookies.id === 'admin'? <span>You Shall Not Buy! admin</span>:"Your Products: "  }</p>
             <OrderButton />
+          </div>
+          {userCookies.id === undefined ? <div>
+            <span style={{fontSize: "14px", color: "red", display: "flex"}}>Please Login to Buy!</span>
+          </div> : ""}
+          
           </div>
         }
         onClose={() => setIsCartDrawerShow(false)}
@@ -108,10 +114,10 @@ function Home() {
 
       <div className="root">
         <div className="filters">
-          <h3>Buscar por :</h3>
+          <h3>Search by :</h3>
 
           <div className="filters-input">
-            <label htmlFor="filter-name">Nombre</label>
+            <label htmlFor="filter-name">Name</label>
             <input
               type="text"
               id="name"
@@ -123,7 +129,7 @@ function Home() {
 
           <br />
           <div className="filters-input">
-            <label htmlFor="filter-min-price">Precio mínimo</label>
+            <label htmlFor="filter-min-price">Min Price</label>
             <input
               type="number"
               name="filter-min-price"
@@ -135,7 +141,7 @@ function Home() {
 
           <br />
           <div className="filters-input">
-            <label htmlFor="filter-max-price">Precio máximo</label>
+            <label htmlFor="filter-max-price">Max Price</label>
             <input
               type="number"
               name="filter-max-price"
@@ -146,7 +152,7 @@ function Home() {
 
           <br />
           <div className="filters-input">
-            <label htmlFor="filter-category">Categoría</label>
+            <label htmlFor="filter-category">Category</label>
             <select
               name="filter-category"
               id="filter-category"
