@@ -16,10 +16,13 @@ import { useLogStore } from "../../stores/useLogStore";
 import { getUser } from "../../functions/cookieHandler";
 import { useCartStore } from "../../stores/useCartStore";
 import { useAdminStore } from "../../stores/useAdminStore";
-// import useOrderMutation from '../../hooks/useOrderMutation';
+import axios from "axios";
+
+import useProductsQuery from "../../hooks/useProductsQuery";
 
 function Admin() {
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
+  const { products, isLoading } = useProductsQuery();
   const globalProducts = useCartStore((state) => state.products);
 
 
@@ -45,19 +48,20 @@ function Admin() {
   //Datos de cookie
   const userCookies = getUser();
 
-  useEffect(() => {
-    fetch(peek("http://localhost:3000/products"))
-      .then((data) => peek(data.json()))
-      // .then(sleep(3000).then((data) => data))
-      .then((data) => {
-        console.log(data);
-        setProducts(data);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch(peek("/api/products"))
+  //     .then((data) => peek(data.json()))
+  //     // .then(sleep(3000).then((data) => data))
+  //     .then((data) => {
+  //       console.log(data);
+  //       setProducts(data);
+  //     });
+  // }, []);
 
 
   return (
     <>
+    {console.log(axios.get("/api/products").then(({data})=> data))}
     <div className="header">
       <div className="header_logo">
         <img src="https://placekitten.com/184/84"></img>

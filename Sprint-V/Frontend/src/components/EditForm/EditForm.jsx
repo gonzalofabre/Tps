@@ -47,7 +47,7 @@ function EditForm() {
     };
 
     try {
-      const response = await axios.put("http://localhost:3000/products", data);
+      const response = await axios.put("/api/products", data);
       console.log(response.status);
       console.log('Product updated: ', response.data.data);
       const { image, title } = response.data.data;

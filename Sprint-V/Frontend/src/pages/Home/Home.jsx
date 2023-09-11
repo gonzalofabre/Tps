@@ -13,12 +13,14 @@ import { useLoginStore } from "../../stores/useLoginStore";
 import { useLogStore } from "../../stores/useLogStore";
 import { getUser } from "../../functions/cookieHandler";
 import { useCartStore } from "../../stores/useCartStore";
-// import useOrderMutation from '../../hooks/useOrderMutation';
-import createOrder from "../../functions/createOrder";
+
+//Query Products:
+import useProductsQuery from "../../hooks/useProductsQuery";
 
 function Home() {
 
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
+  const { products, isLoading } = useProductsQuery();
   const globalProducts = useCartStore((state) => state.products);
 
 
@@ -43,15 +45,15 @@ function Home() {
   //Datos de cookie
   const userCookies = getUser();
 
-  useEffect(() => {
-    fetch(peek("http://localhost:3000/products"))
-      .then((data) => peek(data.json()))
-      // .then(sleep(3000).then((data) => data))
-      .then((data) => {
-        console.log(data);
-        setProducts(data);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch(peek("/api/products"))
+  //     .then((data) => peek(data.json()))
+  //     // .then(sleep(3000).then((data) => data))
+  //     .then((data) => {
+  //       console.log(data);
+  //       setProducts(data);
+  //     });
+  // }, []);
 
   useEffect(() => {
     userCookies.id === undefined ? toggleIsLoggedIn(false):toggleIsLoggedIn(true);
