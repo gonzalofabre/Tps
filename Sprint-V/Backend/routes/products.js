@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 const axios = require('axios');
 const peek = require('../utils/peek');
-const {readAllProducts} = require('../middlewares/productsMiddleware');
-const { getProductsController, updateProduct} = require('../controllers/productsControllers');
+const {readAllProducts, } = require('../middlewares/productsMiddleware');
+const { getProductsController, updateProduct, createNewProduct} = require('../controllers/productsControllers');
 
 
 // router.get('/', function(req, res , next) {
@@ -24,6 +24,8 @@ const { getProductsController, updateProduct} = require('../controllers/products
 router.get('/', readAllProducts, getProductsController );
 
 router.put('/', updateProduct)
+
+router.post('/', createNewProduct)
 
 
 module.exports = router;

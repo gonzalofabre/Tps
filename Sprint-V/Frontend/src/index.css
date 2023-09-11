@@ -139,6 +139,7 @@
   margin: auto;
 }
 
+
 .filters h3 {
   margin: 4px;
 }
@@ -151,6 +152,14 @@
 }
 .filters-input label {
   width: 50%;
+}
+.filters-input-checkbox{
+  margin: auto;
+  width: 50%;
+}
+.filters-input-checkbox label {
+  display: flex;
+  justify-content: space-between;
 }
 .products-layout {
   display: grid;

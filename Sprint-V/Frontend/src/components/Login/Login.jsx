@@ -65,6 +65,7 @@ function Login() {
                 } else {
                   createCookies(id, adress, tel, userName, name, lastName, rol );
                   setIsAdminLogged(true);
+                  toggleLoginShow()
                   navigate("/admin");
                 }
                 

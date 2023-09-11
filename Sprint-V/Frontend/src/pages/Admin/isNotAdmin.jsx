@@ -1,9 +1,10 @@
 import { useAdminStore } from "../../stores/useAdminStore";
 import Admin from "./Admin";
+import { getUser } from "../../functions/cookieHandler";
 
 function IsNotAdmin() {
-  const isAdminLogged = useAdminStore((state) => state.isAdminLogged);
-  return isAdminLogged ? <Admin /> : 
+    const userCookies = getUser()
+  return userCookies.rol === 'admin' ? <Admin /> : 
   <div>
   <div className="header">
     <div className="header_logo">

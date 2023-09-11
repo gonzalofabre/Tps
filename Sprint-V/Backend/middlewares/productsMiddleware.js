@@ -2,14 +2,18 @@ const Products = require('../models/products');
 
 module.exports = {
     createNewProduct: async (req, res) => {
-        const {title, description, image, category, price} = req.body;
+        const {newProductTitle,
+            newProductPrice,
+            newProductDescription,
+            newProductCategory,
+            newProductImage,} = req.body;
         try {
             const newProduct = await Products.create({
-                title,
-                description,
-                category,
-                image,
-                price
+                newProductTitle,
+      newProductPrice,
+      newProductDescription,
+      newProductCategory,
+      newProductImage,
             })
 
             if(newProduct) { return res.status(201).json({message: 'New Product added', data: newProduct})

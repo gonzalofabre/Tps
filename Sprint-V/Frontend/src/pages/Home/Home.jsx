@@ -7,7 +7,7 @@ import Card from "../../components/Card/Card";
 import OrderButton from "../../components/OrderButton/OrderButton";
 import { Cart } from "../../components/Cart/Cart";
 import peek from "../../utils/peek";
-import { Button, Drawer } from "antd";
+import { Button, Drawer, Checkbox } from "antd";
 import { ShoppingCartOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import { useLoginStore } from "../../stores/useLoginStore";
 import { useLogStore } from "../../stores/useLogStore";
@@ -18,17 +18,17 @@ import { useCartStore } from "../../stores/useCartStore";
 import useProductsQuery from "../../hooks/useProductsQuery";
 
 function Home() {
-
   // const [products, setProducts] = useState([]);
   const { products, isLoading } = useProductsQuery();
   const globalProducts = useCartStore((state) => state.products);
-
 
   //Filters
 
   const [filterByName, setFilterByName] = useState("");
   const [filterByMinPrice, setFilterByMinPrice] = useState(0);
   const [filterByMaxPrice, setFilterByMaxPrice] = useState(Infinity);
+  const [isSortByMinPrice, setIsSortByMinPrice] = useState(false);
+  const [isSortByMaxPrice, setIsSortByMaxPrice] = useState(false);
 
   const categories = products.map((product) => product.category);
   const uniqueCategories = [...new Set(categories)];
@@ -56,7 +56,9 @@ function Home() {
   // }, []);
 
   useEffect(() => {
-    userCookies.id === undefined ? toggleIsLoggedIn(false):toggleIsLoggedIn(true);
+    userCookies.id === undefined
+      ? toggleIsLoggedIn(false)
+      : toggleIsLoggedIn(true);
   }, [userCookies.id]);
 
   return (
@@ -68,14 +70,27 @@ function Home() {
       <Drawer
         title={
           <div>
-          <div className="drawer_buy">
-            <p>{userCookies.id === 'admin'? <span>You Shall Not Buy! admin</span>:"Your Products: "  }</p>
-            <OrderButton />
-          </div>
-          {userCookies.id === undefined ? <div>
-            <span style={{fontSize: "14px", color: "red", display: "flex"}}>Please Login to Buy!</span>
-          </div> : ""}
-          
+            <div className="drawer_buy">
+              <p>
+                {userCookies.rol === "admin" ? (
+                  <span>You Shall Not Buy! You are Admin!</span>
+                ) : (
+                  "Your Products: "
+                )}
+              </p>
+              <OrderButton />
+            </div>
+            {userCookies.id === undefined ? (
+              <div>
+                <span
+                  style={{ fontSize: "14px", color: "red", display: "flex" }}
+                >
+                  Please Login to Buy!
+                </span>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         }
         onClose={() => setIsCartDrawerShow(false)}
@@ -166,6 +181,29 @@ function Home() {
               ))}
             </select>
           </div>
+          <div className="filters-input-checkbox">
+            <label htmlFor="order-min">
+              Order by Min Price :
+              <input
+                id="order-min"
+                type="checkbox"
+                defaultChecked={false}
+                onClick={(e) => setIsSortByMinPrice(e.currentTarget.checked)}
+              />
+            </label>
+          </div>
+
+          <div className="filters-input-checkbox">
+            <label htmlFor="order-max">
+              Order by Max Price:
+              <input
+                id="order-max"
+                type="checkbox"
+                defaultChecked={false}
+                onClick={(e) => setIsSortByMaxPrice(e.currentTarget.checked)}
+              />
+            </label>
+          </div>
         </div>
         <div className="products-layout">
           {products
@@ -181,6 +219,9 @@ function Home() {
                 ? true
                 : product.category === filterByCategory
             )
+            .slice()
+            .sort((a, b) => (isSortByMinPrice ? a.price - b.price : 0))
+            .sort((a, b) => (isSortByMaxPrice ? b.price - a.price : 0))
             .map((product) => (
               <Card
                 key={`key-${product.title}-${product.id}`}
