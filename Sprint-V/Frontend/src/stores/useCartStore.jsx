@@ -18,27 +18,32 @@ const openDeleteNotification = (title) =>
     icon: <ExclamationOutlined style={{ color: "red" }} />,
   });
 
-const useCartStore = create((set) => {
-  return {
-    products: [],
-    actions: {
-      addProduct: (product) =>
-        set((state) => {
-          openAddNotification(product.title);
-          return { products: state.products.concat(product) };
-        }),
-      removeProduct: (index) =>
-        set((state) => ({
-          products: state.products.filter(({ title }, currentIndex) => {
-            if (currentIndex === index) {
-              openDeleteNotification(title);
-              return false; //filter cuando recibe False elimina de la matriz el objeto
-            }
-            return true; //no eliminara nada
+  const useCartStore = create((set) => {
+    return {
+      products: [],
+      actions: {
+        addProduct: (product) =>
+          set((state) => {
+            openAddNotification(product.title);
+            return { products: state.products.concat(product) };
           }),
-        })),
-    },
-  };
-});
+        removeProduct: (index) =>
+          set((state) => ({
+            products: state.products.filter(({ title }, currentIndex) => {
+              if (currentIndex === index) {
+                openDeleteNotification(title);
+                return false; //filter cuando recibe False elimina de la matriz el objeto
+              }
+              return true; //no eliminara nada
+            }),
+          })),
+        resetCart: () =>
+          set(() => ({
+            products: [],
+          })),
+      },
+    };
+  });
+  
 
 export { useCartStore };

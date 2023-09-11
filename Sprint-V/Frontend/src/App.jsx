@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import IsNotAdmin from "./pages/Admin/isNotAdmin";
 import Home from "./pages/Home/Home";
 import Register from "./pages/Register/Register";
-import Login from "./components/Login/Login";
 import Success from "./pages/Success/Success";
+import Login from "./components/Login/Login";
+import Confirm from "./pages/Confirm/Confirm";
 import peek from "./utils/peek";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" element={ <Home />} />
           <Route path="/admin" element = { <IsNotAdmin /> } />
           <Route path='/register' element= {<Register />} />
+          <Route path='/confirm' element= {<Confirm />} />
           <Route path='/success' element= {<Success />} />
         </Routes>
       </BrowserRouter>

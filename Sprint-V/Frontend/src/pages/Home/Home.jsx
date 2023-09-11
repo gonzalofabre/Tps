@@ -13,6 +13,7 @@ import { useLoginStore } from "../../stores/useLoginStore";
 import { useLogStore } from "../../stores/useLogStore";
 import { getUser } from "../../functions/cookieHandler";
 import { useCartStore } from "../../stores/useCartStore";
+import { useNavigate } from "react-router-dom";
 
 //Query Products:
 import useProductsQuery from "../../hooks/useProductsQuery";
@@ -21,6 +22,8 @@ function Home() {
   // const [products, setProducts] = useState([]);
   const { products, isLoading } = useProductsQuery();
   const globalProducts = useCartStore((state) => state.products);
+
+  const navigate = useNavigate();
 
   //Filters
 
@@ -78,7 +81,14 @@ function Home() {
                   "Your Products: "
                 )}
               </p>
-              <OrderButton />
+              <Button
+                disabled={userCookies.rol === "admin"}
+                type="primary"
+                size="large"
+                onClick={() => navigate('/confirm')}
+              >
+                Buy
+              </Button>
             </div>
             {userCookies.id === undefined ? (
               <div>

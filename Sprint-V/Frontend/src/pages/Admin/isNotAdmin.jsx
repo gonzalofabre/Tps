@@ -1,11 +1,15 @@
-import { useAdminStore } from "../../stores/useAdminStore";
+
 import Admin from "./Admin";
 import { getUser } from "../../functions/cookieHandler";
+import {Result, Button} from 'antd'
+import { useNavigate } from "react-router-dom";
 
 function IsNotAdmin() {
+    const navigate = useNavigate();
+
     const userCookies = getUser()
   return userCookies.rol === 'admin' ? <Admin /> : 
-  <div>
+  <div style={{backgroundColor: "white"}}>
   <div className="header">
     <div className="header_logo">
       <img src="https://placekitten.com/184/84"></img>
@@ -13,7 +17,12 @@ function IsNotAdmin() {
       <h1> My E-commerce</h1>
     </div>
   </div>
-  <h1 style={{fontSize: "100px", color: "red"}}> UnAuthorized :C</h1>;
+  <Result
+    status="403"
+    title="403"
+    subTitle="Sorry, you are not authorized to access this page."
+    extra={<Button onClick={() => navigate("/")} type="primary">Back Home</Button>}
+  />
   </div>
 }
 
