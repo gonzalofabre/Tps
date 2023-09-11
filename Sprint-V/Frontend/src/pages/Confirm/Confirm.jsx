@@ -8,7 +8,6 @@ import OrderButton from "../../components/OrderButton/OrderButton";
 const Confirm = () => {
   const userCookies = getUser();
   const globalProducts = useCartStore((state) => state.products);
-  const actions = useCartStore((state) => state.actions);
   const navigate = useNavigate();
   return (
     <>
@@ -22,7 +21,7 @@ const Confirm = () => {
               <List
                 itemLayout="horizontal"
                 dataSource={globalProducts}
-                renderItem={(item, index) => (
+                renderItem={(item, ) => (
                   <List.Item>
                     <List.Item.Meta
                       avatar={<Avatar className="avatar" src={item.image} />}

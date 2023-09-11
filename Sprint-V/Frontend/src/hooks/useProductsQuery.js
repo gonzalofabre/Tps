@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
-import peek from "../utils/peek";
+// import peek from "../utils/peek";
 
 function getProducts() {
     return axios.get("/api/products").then(({data})=> data);

@@ -5,7 +5,6 @@ import sleep from "../../utils/sleep";
 import { Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import { useLoginStore } from "../../stores/useLoginStore";
-import { useLogStore } from "../../stores/useLogStore";
 import { useAdminStore } from "../../stores/useAdminStore";
 import {createCookies} from "../../functions/cookieHandler";
 import { useNavigate } from "react-router-dom";
@@ -17,9 +16,7 @@ function Login() {
   const [isInvalidPassword, setIsInvalidPassword] = useState(false);
   const [isUserNotFound, setIsUserNotFound] = useState(false);
   const { toggleLoginShow } = useLoginStore();
-  const { toggleIsLoggedIn } = useLogStore();
   const navigate = useNavigate();
-  const isAdminLogged = useAdminStore((state) => state.isAdminLogged);
   const { setIsAdminLogged } = useAdminStore();
   return (
     <>

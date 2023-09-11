@@ -5,15 +5,12 @@ import Login from "../../components/Login/Login";
 import Welcome from "../../components/Welcome/Welcome";
 import UserDrawer from "../../components/UserDrawer/UserDrawer";
 import Card from "../../components/Card/Card";
-import OrderButton from "../../components/OrderButton/OrderButton";
 import { Cart } from "../../components/Cart/Cart";
-import peek from "../../utils/peek";
-import { Button, Drawer, Checkbox } from "antd";
+import { Button, Drawer } from "antd";
 import { ShoppingCartOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import { useLoginStore } from "../../stores/useLoginStore";
 import { useLogStore } from "../../stores/useLogStore";
 import { getUser } from "../../functions/cookieHandler";
-import { useCartStore } from "../../stores/useCartStore";
 import { useNavigate } from "react-router-dom";
 
 //Query Products:
@@ -21,8 +18,7 @@ import useProductsQuery from "../../hooks/useProductsQuery";
 
 function Home() {
   // const [products, setProducts] = useState([]);
-  const { products, isLoading } = useProductsQuery();
-  const globalProducts = useCartStore((state) => state.products);
+  const { products } = useProductsQuery();
 
   const navigate = useNavigate();
 
@@ -87,7 +83,7 @@ function Home() {
                 disabled={userCookies.rol === "admin"}
                 type="primary"
                 size="large"
-                onClick={() => navigate('/confirm')}
+                onClick={userCookies.rol === "user" ? () => navigate('/confirm') : () => console.log('Please Login')}
               >
                 Buy
               </Button>

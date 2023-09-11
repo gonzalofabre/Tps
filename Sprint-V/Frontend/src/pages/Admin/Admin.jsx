@@ -9,8 +9,6 @@ import AddNewProduct from "../../components/AddNewProduct/AddNewProduct";
 import peek from "../../utils/peek";
 import { Button, Drawer } from "antd";
 
-import { useLoginStore } from "../../stores/useLoginStore";
-import { useLogStore } from "../../stores/useLogStore";
 import { getUser } from "../../functions/cookieHandler";
 
 import { useAdminStore } from "../../stores/useAdminStore";
@@ -33,9 +31,7 @@ function Admin() {
   const uniqueCategories = [...new Set(categories)];
   const [filterByCategory, setFilterByCategory] = useState("-");
 
-  //Drawer
-
-  //Login
+  
 
   const isEditDrawerShow = useAdminStore((state) => state.isEditDrawerShow);
 
@@ -50,7 +46,6 @@ function Admin() {
   useEffect(() => {
     fetch(peek("/api/products"))
       .then((data) => peek(data.json()))
-      // .then(sleep(3000).then((data) => data))
       .then((data) => {
         console.log(data);
         setProducts(data);

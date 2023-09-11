@@ -5,7 +5,7 @@ import { useState } from "react";
 import sleep from "../../utils/sleep";
 import { Button } from "antd";
 import { notification } from "antd";
-import { CheckOutlined, ExclamationOutlined } from "@ant-design/icons";
+import { CheckOutlined } from "@ant-design/icons";
 
 function Register() {
   const [isLoading, setIsLoading] = useState(false);
