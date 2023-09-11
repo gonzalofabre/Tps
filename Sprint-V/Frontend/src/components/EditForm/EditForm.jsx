@@ -14,7 +14,7 @@ const openAddNotification = (title, image) =>
     icon: <img src={image} style={{width: "30px", height: "30px", borderRadius: "50%"}} />,
   });
 
-function EditForm() {
+function EditForm({ updateProductsAfterEdit }) {
   const editStore = useEditStore();
   const { product } = editStore;
   const [isLoading, setIsLoading] = useState(false);
@@ -37,6 +37,9 @@ function EditForm() {
   async function buttonSubmit(e) {
     setIsLoading(true);
     e.preventDefault();
+    
+    
+
     const data = {
       idProduct: product.id,
       newTitle,
@@ -53,6 +56,12 @@ function EditForm() {
       const { image, title } = response.data.data;
       await sleep(3000);
       openAddNotification(title, image);
+
+      //Actualiza los productos en Admin.jsx
+
+      updateProductsAfterEdit(response.data.data)
+
+
     } catch (error) {
       console.error(error.response.status);
     }
