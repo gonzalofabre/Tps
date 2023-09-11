@@ -1,9 +1,7 @@
 /* eslint-disable react/prop-types */
-// import { useState, useEffect } from "react";
-// import "styles.css"
 import { useCartStore } from "../../stores/useCartStore";
 
-function Card({ title, imageUrl, description, price, id, product }) {
+function Card({ title, imageUrl, description, price, product }) {
   const actions = useCartStore(state => state.actions);
   return (
     <div className="card">

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import Login from "../../components/Login/Login";
 import Welcome from "../../components/Welcome/Welcome";
+import UserDrawer from "../../components/UserDrawer/UserDrawer";
 import Card from "../../components/Card/Card";
 import OrderButton from "../../components/OrderButton/OrderButton";
 import { Cart } from "../../components/Cart/Cart";
@@ -39,6 +40,7 @@ function Home() {
 
   //Drawer
   const [isCartDrawerShow, setIsCartDrawerShow] = useState(false);
+  const [isUserDrawerShow, setIsUserDrawerShow] = useState(false)
 
   //Login
   const isLoginShow = useLoginStore((state) => state.isLoginShow);
@@ -109,6 +111,20 @@ function Home() {
         <Cart></Cart>
       </Drawer>
 
+
+      <Drawer
+        title={
+          <h4>{userCookies.userName}</h4>
+        }
+        placement="left"
+        onClose={() => setIsUserDrawerShow(false)}
+        open={isUserDrawerShow}
+      >
+        <UserDrawer />
+      </Drawer>
+
+    
+
       <div className="box_button_open_drawer">
         <Button
           style={{
@@ -116,6 +132,7 @@ function Home() {
             padding: "6.428571428571429px 1.6rem",
           }}
           size="large"
+          onClick={() => setIsUserDrawerShow(true)}
         >
           {" "}
           <MenuFoldOutlined />{" "}

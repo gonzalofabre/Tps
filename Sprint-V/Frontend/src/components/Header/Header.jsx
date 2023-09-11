@@ -7,7 +7,6 @@ import Logout from "../Logout/Logout";
 function Header() {
   const { toggleLoginShow } = useLoginStore();
   const isLoggedIn = useLogStore((state) => state.isLoggedIn);
-  const { toggleIsLoggedIn } = useLogStore();
 
   return (
     <div className="header">

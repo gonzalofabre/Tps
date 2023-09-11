@@ -5,7 +5,6 @@ import sleep from '../../utils/sleep';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { notification } from "antd";
-import { CheckOutlined, ExclamationOutlined } from "@ant-design/icons";
 const openAddNotification = (title, image) =>
   notification.open({
     message: "Product updated!",
