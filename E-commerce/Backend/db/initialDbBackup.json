@@ -240,5 +240,35 @@
         "count": 145
       }
     }
-  ]
+  ],
+  "users": [
+    {
+      "name": "Admin",
+      "lastName": "Admin",
+      "userName": "admin@email.com",
+      "password": "12345",
+      "adress": "Admin adress",
+      "tel": "0351123456",
+      "rol": "admin"
+    },
+    {
+      "name": "Gonzalo",
+      "lastName": "Fabre",
+      "userName": "gonzalo@email.com",
+      "password": "123",
+      "adress": "San Lorenzo",
+      "tel": "12345",
+      "rol": "user"
+    },
+    {
+      "name": "Francisco",
+      "lastName": "Fabre",
+      "userName": "frans.budit@email.com",
+      "password": "12345",
+      "adress": "San Lorenzo",
+      "tel": "02554853",
+      "rol": "user"
+    }
+  ],
+  "orders": [{ "userId": 2 , "products": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops, John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet, Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops, Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops, Solid Gold Petite Micropave " }]
 }

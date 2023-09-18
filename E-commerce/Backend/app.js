@@ -3,23 +3,13 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-// const bodyParser = require('body-parser');
-// const sessions = require('express-session');
+
 const cors = require('cors');
-const readDb = require('./utils/readDb');
-// const createDb = require('./utils/createDb'); <--- Danger
+const createDb = require('./utils/createDb');
+const checkIfDatabaseIsEmpty = require('./utils/checkIfDatabaseIsEmpty');
 
-const { sequelize } = require('./db/database');
-const Users = require('./models/users');
+const { sequelize, syncDatabase } = require('./db/database');
 
-try {
-  sequelize.authenticate()
-  .then(() => {
-    console.log('Conexión con la base de datos establecida')
-  })
-} catch {
-  console.error('No se pudo conectar con la base de datos')
-}
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -29,7 +19,6 @@ const ordersRouter = require('./routes/orders');
 const app = express();
 app.use(cors());
 
-// const oneDay = 1000*60*60*24;
 
 
 // view engine setup
@@ -39,16 +28,9 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-//agregando sessions 
-// app.use(sessions({
-//   secret: "12345",
-//   saveUninitialized: true,
-//   cookie: {maxAge: oneDay},
-//   resave: false
-// }))
+
 app.use(cookieParser());
-// app.use(bodyParser.urlencoded({extended: true}));
-// app.use(bodyParser.json());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
@@ -72,8 +54,23 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// console.log(readDb().products);
-// createDb(); <--- DANGER 
+// Creacion de base de datos EN CASO DE QUE NO EXISTA
+async function startDb () {
+  try {
+    await syncDatabase();
+    console.log('Base de datos sincronizada');
+    const isDatabaseEmpty = await checkIfDatabaseIsEmpty();
+    if(isDatabaseEmpty) {
+      createDb();
+      console.log('Datos creados en la base de datos')
+    }
+  } catch (error) {
+    console.error('Error al sincronizar/crear base de datos')
+  }
+}
+
+startDb();
+
 
 
 
