@@ -1,13 +1,13 @@
 # E-commmerce
-##Tp Final de Icaro
+## Tp Final de Icaro
 
 # Instructivo
 
-##Instalacion de base de datos
+## Instalacion de base de datos
 
-###En el Archivo dentro de Backend/db/database.js la parte donde se indica "gonzalo440151" deberá ser modificada por la contraseña personal de su mysql, de esta forma, la base de datos podra ser creada desde su localhost.
+### En el Archivo dentro de Backend/db/database.js la parte donde se indica "gonzalo440151" deberá ser modificada por la contraseña personal de su mysql, de esta forma, la base de datos podra ser creada desde su localhost.
 
-###Luego de eso puede inicializar tanto el Backend como el Front end escribiendo en la terminal npm run dev
+-Luego de eso puede inicializar tanto el Backend como el Front end escribiendo en la terminal npm run dev
 
 
 ## Usuario de admin = admin@email.com
