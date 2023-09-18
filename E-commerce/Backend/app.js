@@ -63,6 +63,8 @@ async function startDb () {
     if(isDatabaseEmpty) {
       createDb();
       console.log('Datos creados en la base de datos')
+    } else {
+      console.log('Datos existentes en la base de datos, no hizo falta crear datos nuevos');
     }
   } catch (error) {
     console.error('Error al sincronizar/crear base de datos')
