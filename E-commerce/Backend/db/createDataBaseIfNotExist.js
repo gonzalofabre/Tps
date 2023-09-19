@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize("mysql://root:gonzalo440151@localhost/", {
+const sequelize = new Sequelize("mysql://root:contraseña@localhost/", {
   dialect: "mysql",
   define: {
     charset: 'utf8mb4',

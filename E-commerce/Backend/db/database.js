@@ -1,7 +1,6 @@
 const { Sequelize } = require("sequelize");
 
-// Configuración de la conexión sin especificar la base de datos
-const sequelize = new Sequelize("mysql://root:gonzalo440151@localhost/ecommercefabregonzalo", {
+const sequelize = new Sequelize("mysql://root:contraseña@localhost/ecommercefabregonzalo", {
   dialect: "mysql",
   define: {
     charset: 'utf8mb4',
@@ -13,7 +12,6 @@ const sequelize = new Sequelize("mysql://root:gonzalo440151@localhost/ecommercef
 
 const syncDatabase = async () => {
   try {
-    // Ahora puedes especificar la base de datos a la que deseas conectarte
     await sequelize.sync();
     console.log("Base de datos y tablas creadas o sincronizadas correctamente");
   } catch (error) {
