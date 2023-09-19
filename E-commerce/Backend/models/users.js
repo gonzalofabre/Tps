@@ -8,7 +8,7 @@ Users.init(
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     name: DataTypes.STRING,
     lastName: DataTypes.STRING,
-    userName: DataTypes.STRING,
+    userName: {type: DataTypes.STRING, unique: true},
     password: DataTypes.STRING,
     adress: DataTypes.STRING,
     tel: DataTypes.STRING,
@@ -18,6 +18,7 @@ Users.init(
     sequelize,
     modelName: "users",
     timestamps: false, // Desactiva las columnas createdAt y updatedAt
+
   },
 );
 module.exports = Users;

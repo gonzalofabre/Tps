@@ -5,7 +5,7 @@ const Orders = require("../models/orders");
 const readDb = require("./readDb");
 
 async function createDb() {
-  const { products, users, orders } = await readDb().products;
+  const { products, users, orders } = await readDb();
 
   try {
     //Productos
@@ -55,10 +55,10 @@ async function createDb() {
     //Ordenes
 
     const createOrdersPromises = orders.map(async (order) => {
-      const { userId, product } = order;
+      const { userId, products } = order;
       const newOrder = await Orders.create({
         userId,
-        product
+        products
       })
       if(newOrder) {
           console.log("Orden creada" , newOrder)

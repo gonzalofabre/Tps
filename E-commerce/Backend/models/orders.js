@@ -7,7 +7,7 @@ Orders.init(
   {
     userId: DataTypes.INTEGER,
     id:{type:DataTypes.INTEGER,primaryKey:true, autoIncrement:true},
-    products: DataTypes.STRING,
+    products:{ type: DataTypes.STRING(1000), allowNull: false }
   },
   {
     sequelize,

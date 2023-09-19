@@ -1,10 +1,12 @@
 const  Users  = require("../models/users");
+const Products = require("../models/products")
 
 async function checkIfDatabaseIsEmpty () {
     try {
-        const count = await Users.count();
+        const usersCount = await Users.count();
+        const productsCount = await Products.count();
 
-        if (count === 0 ) {
+        if (usersCount === 0 && productsCount === 0 ) {
             return true //Si da 0 es porque la base de Datos esta vacía
         } else {
             return false

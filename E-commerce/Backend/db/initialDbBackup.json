@@ -1,6 +1,20 @@
 {
   "products": [
     {
+      "title": "El anillo único",
+      "price": 10000,
+      "description": "Ash Nazg durbatulûk, ash Nazg gimbatul, ash Nazg thrakatulûk agh burzum-ishi krimpatul",
+      "category": "jewelery",
+      "image": "https://http2.mlstatic.com/D_NQ_NP_706565-MLA42179370092_062020-O.webp"
+    },
+    {
+      "title": "Frostmourne",
+      "price": 8500,
+      "description": "Agonía de escarcha, la espada rúnica que Ner'zhul, el antiguo Rey Lich, clavó en su trono de hielo de Northrend.",
+      "category": "jewelery",
+      "image": "https://gear.blizzard.com/cdn/shop/files/frostmournephoto_0000_lichkingsword_0002_WOWCST000800A.jpg?v=1692292213"
+    },
+    {
       "id": "b64f9572-58c4-4fcf-a4cb-f9d8d85f5abd",
       "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
       "price": 109.95,
@@ -239,7 +253,28 @@
         "rate": 3.6,
         "count": 145
       }
+    },
+    {
+      "id": "f96easdasdw45d9e0-d81b-4610-9366-954d53bc8f64",
+      "title": "Sable Laser",
+      "price": 300,
+      "description": "Un arma que puede traer Orden o Caos en la Galaxia",
+      "category": "electronics",
+      "image": "https://files.cults3d.com/uploaders/22692884/illustration-file/d37c9086-c740-4d0e-a55a-4edc014c085e/Obi-Wan-Kenobi-Lightsaber-II-Thumbnail.png",
+      "rating": {
+        "rate": 5.3,
+        "count": 147
+      }
+    },
+    {
+      "title": "Lampara bonita",
+      "price": 40,
+      "description": "Una lampara muy bonita UwU",
+      "category": "electronics",
+      "image": "https://http2.mlstatic.com/D_NQ_NP_821453-MLA51561775340_092022-O.webp"
     }
+    
+  
   ],
   "users": [
     {
@@ -270,5 +305,10 @@
       "rol": "user"
     }
   ],
-  "orders": [{ "userId": 2 , "products": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops, John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet, Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops, Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops, Solid Gold Petite Micropave " }]
+  "orders": [
+    {
+      "userId": 2,
+      "products": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops, John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet, Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops, Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops, Solid Gold Petite Micropave "
+    }
+  ]
 }

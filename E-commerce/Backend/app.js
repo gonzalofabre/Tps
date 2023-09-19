@@ -8,13 +8,15 @@ const cors = require('cors');
 const createDb = require('./utils/createDb');
 const checkIfDatabaseIsEmpty = require('./utils/checkIfDatabaseIsEmpty');
 
-const { sequelize, syncDatabase } = require('./db/database');
+const { syncDatabase } = require('./db/database');
+const createDatabaseIfNotExists = require('./db/createDataBaseIfNotExist');
 
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
 const ordersRouter = require('./routes/orders');
+const { create } = require('./models/products');
 
 const app = express();
 app.use(cors());
@@ -57,12 +59,14 @@ app.use(function(err, req, res, next) {
 // Creacion de base de datos EN CASO DE QUE NO EXISTA
 async function startDb () {
   try {
+    await createDatabaseIfNotExists(); // Crea la base de datos en caso de que no exista
     await syncDatabase();
-    console.log('Base de datos sincronizada');
+    
     const isDatabaseEmpty = await checkIfDatabaseIsEmpty();
     if(isDatabaseEmpty) {
-      createDb();
-      console.log('Datos creados en la base de datos')
+      console.log('Base de datos sincronizada')
+      await createDb();
+      console.log('Data pusheada  la base de datos')
     } else {
       console.log('Datos existentes en la base de datos, no hizo falta crear datos nuevos');
     }
